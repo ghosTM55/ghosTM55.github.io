@@ -228,8 +228,9 @@ input, select, textarea {
 
 		background: #2a2a2a url("images/bg.jpg") center;
 		background-size: cover;
-		background-repeat: repeat-x;
+		/*background-repeat: repeat-x;*/
 		height: 100%;
+		width: 100%;
 		left: 0;
 		opacity: 1;
 		position: fixed;
