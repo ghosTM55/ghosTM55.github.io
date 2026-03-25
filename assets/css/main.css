@@ -1,4 +1,19 @@
 /* =========================================================
+   Font  (self-hosted — Latin subset only, ~12 KB)
+   ========================================================= */
+
+@font-face {
+	font-family: 'Tektur Variable';
+	font-style: normal;
+	font-weight: 400 900;
+	font-display: swap;
+	src: url('../webfonts/tektur-latin-variable.woff2') format('woff2-variations');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+	               U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+	               U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* =========================================================
    Custom properties
    ========================================================= */
 
@@ -399,15 +414,22 @@ a:hover { border-color: transparent; }
 
 	body, input, select, textarea { font-size: 11pt; }
 
-	/* Disable horizontal pan on mobile — use cover instead */
+	/* On mobile, pan via background-position instead of transform.
+	   This avoids the overflow:hidden clipping issue when the element
+	   is exactly viewport-width, and has no layout side-effects. */
+	@keyframes bg-pan {
+		0%   { background-position: 0% center; }
+		100% { background-position: 100% center; }
+	}
+
 	#bg {
-		animation: none;
+		animation: bg-pan 30s ease-in-out infinite alternate;
 		background-size: cover;
-		background-position: center center;
+		background-position: 0% center;
 		width: 100%;
 	}
 
-	/* Fix background-attachment: fixed bug on iOS Safari */
+	/* Fix background-attachment: fixed rendering bug on iOS Safari */
 	#overlay {
 		background-attachment: scroll, scroll;
 	}
