@@ -8,73 +8,76 @@
 	<meta property="og:title" content="@ghosTM55 — Thomas Yao" />
 	<meta property="og:description" content="Hacker · Entrepreneur · Archer · Gamer · World Citizen" />
 	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://thomasyao.wtf" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="@ghosTM55 — Thomas Yao" />
+	<meta name="twitter:description" content="Hacker · Entrepreneur · Archer · Gamer · World Citizen" />
 	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+	<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+	<link rel="preload" href="assets/css/images/bg.jpg" as="image" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/tektur/index.css" />
-<link rel="stylesheet" href="assets/css/main.css" />
+	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 </head>
 <body class="is-preload">
 	<div id="wrapper">
-		<div id="bg"></div>
-		<div id="overlay"></div>
-		<div id="main">
 
-			<header id="header">
-				<h1>Thomas Yao</h1>
-				<p>Hacker &nbsp;&bull;&nbsp; Entrepreneur &nbsp;&bull;&nbsp; Archer &nbsp;&bull;&nbsp; Gamer &nbsp;&bull;&nbsp; World Citizen</p>
-			</header>
+		<section id="hero">
+			<div id="bg"></div>
+			<div id="overlay"></div>
+			<div id="main">
+				<header id="header">
+					<h1>Thomas Yao</h1>
+					<p>Hacker &nbsp;&bull;&nbsp; Entrepreneur &nbsp;&bull;&nbsp; Archer &nbsp;&bull;&nbsp; Gamer &nbsp;&bull;&nbsp; World Citizen</p>
+				</header>
+			</div>
+		</section>
 
-		</div>
+		<!-- future sections go here -->
+
 	</div>
 	<script>
-		window.onload = function() { document.body.classList.remove('is-preload'); }
-		window.ontouchmove = function() { return false; }
-		window.onorientationchange = function() { document.body.scrollTop = 0; }
+		window.addEventListener('load', () => { document.body.classList.remove('is-preload'); });
+		window.addEventListener('orientationchange', () => { document.body.scrollTop = 0; });
 
-		(function () {
-			var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789•';
-			var FLIPS = 10;
-			var FLIP_MS = 55;
-			var CHAR_DELAY = 38;
+		(() => {
+			const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789•';
+			const FLIPS = 10;
+			const FLIP_MS = 55;
+			const CHAR_DELAY = 38;
 
-			var bioEl = document.querySelector('#header p');
-			var bioText = bioEl ? bioEl.innerText : '';
+			const bioEl = document.querySelector('#header p');
+			const bioText = bioEl ? bioEl.innerText : '';
 
 			// Pre-fill with invisible spans to preserve #header height from the start
 			if (bioEl) {
-				bioEl.innerHTML = Array.from(bioText).map(function (ch) {
-					if (ch === ' ' || ch === '\u00a0') {
-						return '<span class="sf-char">&nbsp;</span>';
-					}
-					if (ch === '\u2022') {
-						return '<span class="sf-char sf-fade" style="opacity:0">&nbsp;</span>';
-					}
+				bioEl.innerHTML = Array.from(bioText).map(ch => {
+					if (ch === ' ' || ch === '\u00a0') return '<span class="sf-char">&nbsp;</span>';
+					if (ch === '\u2022') return '<span class="sf-char sf-fade" style="opacity:0">&nbsp;</span>';
 					return '<span class="sf-char" style="opacity:0">&nbsp;</span>';
 				}).join('');
 			}
 
 			function splitFlap(el) {
-				Array.from(el.querySelectorAll('.sf-char')).forEach(function (span, i) {
-					var target = bioText[i];
-
+				Array.from(el.querySelectorAll('.sf-char')).forEach((span, i) => {
+					const target = bioText[i];
 					if (target === ' ' || target === '\u00a0') return;
 
-					setTimeout(function () {
+					setTimeout(() => {
 						if (target === '\u2022') {
 							span.textContent = target;
-							requestAnimationFrame(function () {
-								requestAnimationFrame(function () {
-									span.style.opacity = '1';
-								});
-							});
+							requestAnimationFrame(() => requestAnimationFrame(() => {
+								span.style.opacity = '1';
+							}));
 							return;
 						}
 
-						var count = 0;
+						let count = 0;
 						span.style.opacity = '1';
 						span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
 
-						var iv = setInterval(function () {
+						const iv = setInterval(() => {
 							count++;
 							if (count >= FLIPS) {
 								clearInterval(iv);
@@ -87,10 +90,10 @@
 				});
 			}
 
-			document.getElementById('header').addEventListener('animationend', function () {
+			document.getElementById('header').addEventListener('animationend', () => {
 				splitFlap(document.querySelector('#header p'));
 			}, { once: true });
-		}());
+		})();
 	</script>
 </body>
 </html>

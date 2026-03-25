@@ -1,6 +1,19 @@
-/* Fonts and Font Awesome are loaded via CDN links in HTML */
+/* =========================================================
+   Custom properties
+   ========================================================= */
 
-/* Reset */
+:root {
+	--c-fg:              #fff;
+	--c-bg:              #000;
+	--c-bg-tile:         #2a2a2a;
+	--c-nav-hover-bg:    rgba(255, 255, 255, 0.175);
+	--c-nav-active-bg:   rgba(255, 255, 255, 0.35);
+}
+
+/* =========================================================
+   Reset
+   Based on meyerweb.com/eric/tools/css/reset (v2.0)
+   ========================================================= */
 
 html, body, div, span, applet, object,
 iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
@@ -26,24 +39,26 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-body { line-height: 1; }
-ol, ul { list-style: none; }
+body         { line-height: 1; }
+ol, ul       { list-style: none; }
 blockquote, q { quotes: none; }
 blockquote:before, blockquote:after,
 q:before, q:after { content: ''; content: none; }
-table { border-collapse: collapse; border-spacing: 0; }
+table        { border-collapse: collapse; border-spacing: 0; }
 
-/* Basic */
+/* =========================================================
+   Base
+   ========================================================= */
 
 html { box-sizing: border-box; }
 *, *:before, *:after { box-sizing: inherit; }
 
 body {
-	background: #000;
-	overflow: hidden;
+	background: var(--c-bg);
 	-webkit-text-size-adjust: none;
 }
 
+/* Suppress all animations until the page finishes loading */
 body.is-preload *,
 body.is-preload *:before,
 body.is-preload *:after {
@@ -52,7 +67,7 @@ body.is-preload *:after {
 }
 
 body, input, select, textarea {
-	color: #fff;
+	color: var(--c-fg);
 	font-family: 'Tektur Variable', 'Tektur', sans-serif;
 	font-size: 15pt;
 	font-weight: 400;
@@ -78,7 +93,9 @@ a {
 
 a:hover { border-color: transparent; }
 
-/* Icon */
+/* =========================================================
+   Icon  (Font Awesome glyphs)
+   ========================================================= */
 
 .icon {
 	text-decoration: none;
@@ -99,7 +116,7 @@ a:hover { border-color: transparent; }
 	font-weight: 400;
 }
 
-.icon > .label { display: none; }
+.icon > .label    { display: none; }
 .icon.solid:before { font-weight: 900; }
 .icon.fa-brands:before { font-family: 'Font Awesome 6 Brands'; }
 
@@ -112,7 +129,9 @@ a:hover { border-color: transparent; }
 	background-position: center;
 }
 
-/* Wrapper */
+/* =========================================================
+   Wrapper  (fade-in animation container)
+   ========================================================= */
 
 @keyframes wrapper {
 	0%   { opacity: 0; }
@@ -122,15 +141,23 @@ a:hover { border-color: transparent; }
 #wrapper {
 	animation: wrapper 3s forwards;
 	backface-visibility: hidden;
-	height: 100%;
-	left: 0;
 	opacity: 0;
-	position: fixed;
-	top: 0;
-	width: 100%;
 }
 
-/* BG */
+/* =========================================================
+   Hero section
+   ========================================================= */
+
+#hero {
+	position: relative;
+	min-height: 100vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* ── Background ── */
 
 @keyframes bg {
 	0%   { transform: translate3d(0, 0, 0); }
@@ -141,18 +168,16 @@ a:hover { border-color: transparent; }
 	animation: bg 60s linear infinite;
 	backface-visibility: hidden;
 	transform: translate3d(0, 0, 0);
-	background: #2a2a2a url("images/bg.jpg") center center;
+	background: var(--c-bg-tile) url("images/bg.jpg") center center;
 	background-size: 2250px auto;
-	min-height: 100vh;
+	position: absolute;
+	top: 0;
+	left: 0;
 	height: 100%;
 	width: 6750px;
-	left: 0;
-	opacity: 1;
-	position: fixed;
-	top: 0;
 }
 
-/* Overlay */
+/* ── Overlay ── */
 
 @keyframes overlay {
 	0%   { opacity: 0; }
@@ -161,40 +186,31 @@ a:hover { border-color: transparent; }
 
 #overlay {
 	animation: overlay 1.5s 1.5s forwards;
-	background-attachment: fixed, fixed;
 	background-image: url("images/overlay-pattern.png"), url("images/overlay.svg");
 	background-position: top left, center center;
 	background-repeat: repeat, no-repeat;
 	background-size: auto, cover;
-	height: 100%;
-	left: 0;
-	opacity: 0;
-	position: fixed;
+	position: absolute;
 	top: 0;
+	left: 0;
 	width: 100%;
+	height: 100%;
+	opacity: 0;
 }
 
-/* Main */
+/* ── Content ── */
 
 #main {
-	height: 100%;
-	left: 0;
-	position: fixed;
-	text-align: center;
-	top: 0;
+	position: relative;
+	z-index: 1;
 	width: 100%;
+	text-align: center;
+	padding: 2em 1em;
 }
 
-#main:before {
-	content: '';
-	display: inline-block;
-	height: 100%;
-	margin-right: 0;
-	vertical-align: middle;
-	width: 1px;
-}
-
-/* Header */
+/* =========================================================
+   Header
+   ========================================================= */
 
 @keyframes header {
 	0%   { transform: translate3d(0, 1em, 0); opacity: 0; }
@@ -209,14 +225,10 @@ a:hover { border-color: transparent; }
 #header {
 	animation: header 1s 2.25s forwards;
 	backface-visibility: hidden;
-	transform: translate3d(0, 0, 0);
 	cursor: default;
 	display: inline-block;
 	opacity: 0;
-	position: relative;
 	text-align: center;
-	top: -1em;
-	vertical-align: middle;
 	width: 90%;
 }
 
@@ -246,6 +258,7 @@ a:hover { border-color: transparent; }
 	transition: opacity 0.5s ease;
 }
 
+/* Nav icon list (for when social links are added) */
 #header nav {
 	margin: 1.5em 0 0 0;
 }
@@ -253,13 +266,11 @@ a:hover { border-color: transparent; }
 #header nav li {
 	animation: nav-icons 0.5s ease-in-out forwards;
 	backface-visibility: hidden;
-	transform: translate3d(0, 0, 0);
 	display: inline-block;
 	height: 5.35em;
 	line-height: 5.885em;
 	opacity: 0;
 	position: relative;
-	top: 0;
 	width: 5.35em;
 }
 
@@ -286,36 +297,24 @@ a:hover { border-color: transparent; }
 #header nav a:before {
 	transition: all 0.2s ease-in-out;
 	border-radius: 100%;
-	border: solid 1px #fff;
+	border: solid 1px var(--c-fg);
 	display: block;
 	font-size: 1.75em;
 	height: 2.5em;
 	line-height: 2.5em;
 	position: relative;
 	text-align: center;
-	top: 0;
 	width: 2.5em;
 }
 
-#header nav a:hover { font-size: 1.1em; }
+#header nav a:hover        { font-size: 1.1em; }
+#header nav a:hover:before { background-color: var(--c-nav-hover-bg); }
 
-#header nav a[href*="douyin"]:hover span.label,
-#header nav a[href*="tiktok"]:hover span.label { opacity: 1; }
+#header nav a:active        { font-size: 0.95em; background: none; }
+#header nav a:active:before { background-color: var(--c-nav-active-bg); }
 
-#header nav a:hover:before {
-	background-color: rgba(255, 255, 255, 0.175);
-	color: #fff;
-}
-
-#header nav a:active { font-size: 0.95em; background: none; }
-
-#header nav a:active:before {
-	background-color: rgba(255, 255, 255, 0.35);
-	color: #fff;
-}
-
-#header nav a[href*="douyin"] span.label,
-#header nav a[href*="tiktok"] span.label {
+/* Tooltip label for social icons (e.g. Douyin / TikTok) */
+#header nav a span.label {
 	display: block;
 	position: absolute;
 	top: calc(100% + 0.3em);
@@ -330,7 +329,11 @@ a:hover { border-color: transparent; }
 	color: rgba(255, 255, 255, 0.85);
 }
 
-/* Footer */
+#header nav a:hover span.label { opacity: 1; }
+
+/* =========================================================
+   Footer
+   ========================================================= */
 
 #footer {
 	background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.5) 75%);
@@ -344,7 +347,9 @@ a:hover { border-color: transparent; }
 	width: 100%;
 }
 
-/* Wide */
+/* =========================================================
+   Responsive  — Wide  (≤ 1680px)
+   ========================================================= */
 
 @media screen and (max-width: 1680px) {
 
@@ -362,7 +367,9 @@ a:hover { border-color: transparent; }
 
 }
 
-/* Normal */
+/* =========================================================
+   Responsive  — Normal  (≤ 1280px)
+   ========================================================= */
 
 @media screen and (max-width: 1280px) {
 
@@ -380,7 +387,9 @@ a:hover { border-color: transparent; }
 
 }
 
-/* Mobile */
+/* =========================================================
+   Responsive  — Mobile  (≤ 736px)
+   ========================================================= */
 
 @media screen and (max-width: 736px) {
 
@@ -390,20 +399,21 @@ a:hover { border-color: transparent; }
 
 	body, input, select, textarea { font-size: 11pt; }
 
-	@keyframes bg {
-		0%   { transform: translate3d(0, 0, 0); }
-		100% { transform: translate3d(-300px, 0, 0); }
-	}
-
+	/* Disable horizontal pan on mobile — use cover instead */
 	#bg {
+		animation: none;
 		background-size: cover;
-		min-height: 100vh;
+		background-position: center center;
 		width: 100%;
 	}
 
-	#header h1 { font-size: 3.5em; }
+	/* Fix background-attachment: fixed bug on iOS Safari */
+	#overlay {
+		background-attachment: scroll, scroll;
+	}
 
-	#header p { font-size: 1.1em; }
+	#header h1 { font-size: 3.5em; }
+	#header p  { font-size: 1.1em; }
 
 	#header nav {
 		font-size: 0.85em;
@@ -420,23 +430,11 @@ a:hover { border-color: transparent; }
 
 }
 
-/* Mobile Portrait */
+/* =========================================================
+   Responsive  — Mobile Portrait  (≤ 480px)
+   ========================================================= */
 
 @media screen and (max-width: 480px) {
-
-	@keyframes bg {
-		0%   { transform: translate3d(0, 0, 0); }
-		100% { transform: translate3d(-412.5px, 0, 0); }
-	}
-
-	#bg {
-		background-size: cover;
-		min-height: 100vh;
-		width: 100%;
-		position: fixed;
-		top: 0;
-		left: 0;
-	}
 
 	#header nav {
 		padding: 0 0.5em;
