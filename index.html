@@ -1,50 +1,96 @@
 <!DOCTYPE HTML>
-<!--
-	Aerial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>@ghosTM55</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
-		<div id="wrapper">
-			<div id="bg"></div>
-			<div id="overlay"></div>
-			<div id="main">
+<html lang="en">
+<head>
+	<title>@ghosTM55</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<meta name="description" content="Thomas Yao — Hacker, Entrepreneur, Archer, Gamer, World Citizen" />
+	<meta property="og:title" content="@ghosTM55 — Thomas Yao" />
+	<meta property="og:description" content="Hacker · Entrepreneur · Archer · Gamer · World Citizen" />
+	<meta property="og:type" content="website" />
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/tektur/index.css" />
+<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+	<div id="wrapper">
+		<div id="bg"></div>
+		<div id="overlay"></div>
+		<div id="main">
 
-				<!-- Header -->
-					<header id="header">
-						<h1>Thomas Yao</h1>
-						<p>Hacker &nbsp;&bull;&nbsp; Entrepreneur &nbsp;&bull;&nbsp; Archer &nbsp;&bull;&nbsp; Gamer &nbsp;&bull;&nbsp; World Citizen</p>
-						<nav>
-							<ul>
-								<li><a href="https://twitter.com/ghostm55" class="icon brands fa-twitter" target="_blank"><span class="label">Twitter</span></a></li>
-								<li><a href="https://blog.thomasyao.wtf" class="icon brands fa-wordpress" target="_blank"><span class="label">Blog</span></a></li>
-								<li><a href="https://www.linkedin.com/in/ghostm55/" class="icon brands fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-								<li><a href="https://www.youtube.com/thomasyao" class="icon brands fa-youtube" target="_blank"><span class="label">YouTube</span></a></li>
-								<!-- <li><a href="https://github.com/ghosTM55/" class="icon brands fa-github" target="_blank"><span class="label">Github</span></a></li> -->
-							</ul>
-						</nav>
-					</header>
+			<header id="header">
+				<h1>Thomas Yao</h1>
+				<p>Hacker &nbsp;&bull;&nbsp; Entrepreneur &nbsp;&bull;&nbsp; Archer &nbsp;&bull;&nbsp; Gamer &nbsp;&bull;&nbsp; World Citizen</p>
+			</header>
 
-				<!-- Footer -->
-					<!-- <footer id="footer">
-						<span class="copyright">Q29udGFjdCBtZSB2aWEgZW1haWw6IHRob21hc195YW9Ab3V0bG9vay5jb20K</span>
-					</footer> -->
-
-			</div>
 		</div>
-		<script>
-			window.onload = function() { document.body.classList.remove('is-preload'); }
-			window.ontouchmove = function() { return false; }
-			window.onorientationchange = function() { document.body.scrollTop = 0; }
-		</script>
-	</body>
+	</div>
+	<script>
+		window.onload = function() { document.body.classList.remove('is-preload'); }
+		window.ontouchmove = function() { return false; }
+		window.onorientationchange = function() { document.body.scrollTop = 0; }
+
+		(function () {
+			var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789•';
+			var FLIPS = 10;
+			var FLIP_MS = 55;
+			var CHAR_DELAY = 38;
+
+			var bioEl = document.querySelector('#header p');
+			var bioText = bioEl ? bioEl.innerText : '';
+
+			// Pre-fill with invisible spans to preserve #header height from the start
+			if (bioEl) {
+				bioEl.innerHTML = Array.from(bioText).map(function (ch) {
+					if (ch === ' ' || ch === '\u00a0') {
+						return '<span class="sf-char">&nbsp;</span>';
+					}
+					if (ch === '\u2022') {
+						return '<span class="sf-char sf-fade" style="opacity:0">&nbsp;</span>';
+					}
+					return '<span class="sf-char" style="opacity:0">&nbsp;</span>';
+				}).join('');
+			}
+
+			function splitFlap(el) {
+				Array.from(el.querySelectorAll('.sf-char')).forEach(function (span, i) {
+					var target = bioText[i];
+
+					if (target === ' ' || target === '\u00a0') return;
+
+					setTimeout(function () {
+						if (target === '\u2022') {
+							span.textContent = target;
+							requestAnimationFrame(function () {
+								requestAnimationFrame(function () {
+									span.style.opacity = '1';
+								});
+							});
+							return;
+						}
+
+						var count = 0;
+						span.style.opacity = '1';
+						span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+
+						var iv = setInterval(function () {
+							count++;
+							if (count >= FLIPS) {
+								clearInterval(iv);
+								span.textContent = target;
+							} else {
+								span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+							}
+						}, FLIP_MS);
+					}, i * CHAR_DELAY);
+				});
+			}
+
+			document.getElementById('header').addEventListener('animationend', function () {
+				splitFlap(document.querySelector('#header p'));
+			}, { once: true });
+		}());
+	</script>
+</body>
 </html>
