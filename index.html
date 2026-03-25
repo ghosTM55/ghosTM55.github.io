@@ -13,10 +13,19 @@
 	<meta name="twitter:title" content="@ghosTM55 — Thomas Yao" />
 	<meta name="twitter:description" content="Hacker · Entrepreneur · Archer · Gamer · World Citizen" />
 	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-	<link rel="preload" href="assets/webfonts/tektur-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link rel="preload" href="assets/css/images/bg.jpg" as="image" />
 	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<!-- Google Fonts loaded non-blocking: enhancement where accessible.
+	     main.css @font-face (self-hosted) is the guaranteed fallback. -->
+	<link rel="stylesheet"
+	      href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap"
+	      media="print" onload="this.media='all'" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" />
+	</noscript>
 </head>
 <body class="is-preload">
 	<div id="wrapper">
@@ -26,7 +35,7 @@
 			<div id="overlay"></div>
 			<div id="main">
 				<header id="header">
-					<h1>Thomas Yao</h1>
+					<h1>Thomas YAO</h1>
 					<p>Hacker &nbsp;&bull;&nbsp; Entrepreneur &nbsp;&bull;&nbsp; Archer &nbsp;&bull;&nbsp; Gamer &nbsp;&bull;&nbsp; World Citizen</p>
 				</header>
 			</div>
