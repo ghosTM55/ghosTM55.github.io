@@ -13,94 +13,45 @@
 	<meta name="twitter:title" content="@ghosTM55 — Thomas Yao" />
 	<meta name="twitter:description" content="Hacker · Entrepreneur · Archer · Gamer · World Citizen" />
 	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-	<link rel="preload" href="assets/css/images/bg.jpg" as="image" />
+	<link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
 	<link rel="stylesheet" href="assets/css/main.css" />
-	<!-- Google Fonts loaded non-blocking: enhancement where accessible.
-	     main.css @font-face (self-hosted) is the guaranteed fallback. -->
-	<link rel="stylesheet"
-	      href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap"
-	      media="print" onload="this.media='all'" />
 	<noscript>
 		<link rel="stylesheet" href="assets/css/noscript.css" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quantico:wght@400;700&display=swap" />
 	</noscript>
 </head>
 <body class="is-preload">
 	<div id="wrapper">
-
-		<section id="hero">
-			<div id="bg"></div>
-			<div id="overlay"></div>
-			<div id="main">
-				<header id="header">
-					<h1>Thomas YAO</h1>
-					<p>Hacker &nbsp;&bull;&nbsp; Entrepreneur &nbsp;&bull;&nbsp; Archer &nbsp;&bull;&nbsp; Gamer &nbsp;&bull;&nbsp; World Citizen</p>
-				</header>
+		<section id="cover">
+			<div id="cover-bg" aria-hidden="true">
+				<iframe
+					id="cover-shader"
+					src="assets/shaders/nong-wave.html"
+					loading="lazy"
+					referrerpolicy="no-referrer"
+					tabindex="-1"
+					aria-hidden="true"></iframe>
+			</div>
+			<div id="cover-overlay" aria-hidden="true"></div>
+			<div id="cover-main">
+				<div id="cover-copy">
+					<header id="header">
+						<h1>Thomas YAO</h1>
+						<p>Hacker &nbsp;&bull;&nbsp; Entrepreneur &nbsp;&bull;&nbsp; Archer &nbsp;&bull;&nbsp; Gamer &nbsp;&bull;&nbsp; World Citizen</p>
+					</header>
+					<nav id="cover-social" aria-label="Social links">
+						<ul>
+							<li><a href="https://twitter.com/ghostm55" target="_blank" rel="noopener noreferrer"><span class="social-icon icon fab fa-twitter" aria-hidden="true"></span><span class="social-name">Twitter</span></a></li>
+							<li><a href="https://blog.thomasyao.wtf" target="_blank" rel="noopener noreferrer"><span class="social-icon icon hashnode" aria-hidden="true"></span><span class="social-name">Blog</span></a></li>
+							<li><a href="https://www.tiktok.com/@thomasyao90" target="_blank" rel="noopener noreferrer"><span class="social-icon icon fab fa-tiktok" aria-hidden="true"></span><span class="social-name">TikTok</span></a></li>
+							<li><a href="https://www.youtube.com/thomasyao" target="_blank" rel="noopener noreferrer"><span class="social-icon icon fab fa-youtube" aria-hidden="true"></span><span class="social-name">YouTube</span></a></li>
+							<li><a href="https://github.com/ghostm55/" target="_blank" rel="noopener noreferrer"><span class="social-icon icon fab fa-github" aria-hidden="true"></span><span class="social-name">GitHub</span></a></li>
+						</ul>
+					</nav>
+				</div>
+				<!-- Enter My World CTA temporarily hidden until /en/ is ready for release. -->
 			</div>
 		</section>
-
-		<!-- future sections go here -->
-
 	</div>
-	<script>
-		window.addEventListener('load', () => { document.body.classList.remove('is-preload'); });
-		window.addEventListener('orientationchange', () => { document.body.scrollTop = 0; });
-
-		(() => {
-			const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789•';
-			const FLIPS = 10;
-			const FLIP_MS = 55;
-			const CHAR_DELAY = 38;
-
-			const bioEl = document.querySelector('#header p');
-			const bioText = bioEl ? bioEl.innerText : '';
-
-			// Pre-fill with invisible spans to preserve #header height from the start
-			if (bioEl) {
-				bioEl.innerHTML = Array.from(bioText).map(ch => {
-					if (ch === ' ' || ch === '\u00a0') return '<span class="sf-char">&nbsp;</span>';
-					if (ch === '\u2022') return '<span class="sf-char sf-fade" style="opacity:0">&nbsp;</span>';
-					return '<span class="sf-char" style="opacity:0">&nbsp;</span>';
-				}).join('');
-			}
-
-			function splitFlap(el) {
-				Array.from(el.querySelectorAll('.sf-char')).forEach((span, i) => {
-					const target = bioText[i];
-					if (target === ' ' || target === '\u00a0') return;
-
-					setTimeout(() => {
-						if (target === '\u2022') {
-							span.textContent = target;
-							requestAnimationFrame(() => requestAnimationFrame(() => {
-								span.style.opacity = '1';
-							}));
-							return;
-						}
-
-						let count = 0;
-						span.style.opacity = '1';
-						span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-
-						const iv = setInterval(() => {
-							count++;
-							if (count >= FLIPS) {
-								clearInterval(iv);
-								span.textContent = target;
-							} else {
-								span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
-							}
-						}, FLIP_MS);
-					}, i * CHAR_DELAY);
-				});
-			}
-
-			document.getElementById('header').addEventListener('animationend', () => {
-				splitFlap(document.querySelector('#header p'));
-			}, { once: true });
-		})();
-	</script>
+	<script type="module" src="assets/js/site.js"></script>
 </body>
 </html>
