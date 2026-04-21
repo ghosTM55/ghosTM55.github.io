@@ -1,15 +1,13 @@
-const COVER_REVEAL_DELAY_MS = 3000;
 const HEADING_REVEAL_DELAY_MS = 500;
 const HEADING_FADE_DURATION_MS = 420;
-const SOCIAL_STAGGER_MS = 55;
-const SOCIAL_REVEAL_DURATION_MS = 180;
-const ENTER_WORLD_MIN_WIDTH = 737;
+const COMPACT_BIO_MIN_WIDTH = 737;
+const SHADER_IDLE_TIMEOUT_MS = 800;
 
-export function shouldShowEnterWorld({ viewportWidth } = {}) {
-  return typeof viewportWidth !== 'number' || viewportWidth >= ENTER_WORLD_MIN_WIDTH;
+function shouldUseCompactBio({ viewportWidth } = {}) {
+  return typeof viewportWidth === 'number' && viewportWidth < COMPACT_BIO_MIN_WIDTH;
 }
 
-export function getBioSegments(bioText = '') {
+function getBioSegments(bioText = '') {
   return bioText
     .split('\u2022')
     .map((segment) => segment.replace(/\s+/g, ' ').trim())
@@ -24,14 +22,13 @@ function getCompactBioDuration(bioText) {
   ), 0) + 120;
 }
 
-export function getCoverRevealState({
-  bioAnimated,
-  linksVisible,
-  allowButton = true
-}) {
-  return {
-    buttonVisible: Boolean(bioAnimated && linksVisible && allowButton)
-  };
+function shouldLoadShader() {
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
+  if (connection?.saveData) return false;
+
+  return true;
 }
 
 function primeSplitFlapText(bioEl, bioText) {
@@ -134,21 +131,54 @@ function playSplitFlap(bioEl, bioText) {
   requestAnimationFrame(start);
 }
 
-export function initializeSite({
+function queueShaderLoad({ body, shaderFrame }) {
+  if (!body || !shaderFrame) return;
+  if (shaderFrame.dataset.loaded === 'true' || shaderFrame.dataset.pending === 'true') return;
+
+  if (!shouldLoadShader()) {
+    body.classList.add('is-cover-static');
+    return;
+  }
+
+  body.classList.remove('is-cover-static');
+  shaderFrame.dataset.pending = 'true';
+
+  const load = () => {
+    if (shaderFrame.dataset.loaded === 'true') return;
+
+    const { src } = shaderFrame.dataset;
+    delete shaderFrame.dataset.pending;
+
+    if (!src) return;
+
+    shaderFrame.addEventListener('load', () => {
+      body.classList.add('is-cover-shader-ready');
+    }, { once: true });
+    shaderFrame.src = src;
+    shaderFrame.dataset.loaded = 'true';
+  };
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(load, { timeout: SHADER_IDLE_TIMEOUT_MS });
+  } else {
+    window.setTimeout(load, 220);
+  }
+}
+
+function initializeSite({
   body = document.body,
+  shaderFrame = document.getElementById('cover-shader'),
   headerEl = document.getElementById('header'),
-  bioEl = headerEl?.querySelector('p'),
-  socialItems = Array.from(document.querySelectorAll('#cover-social li'))
+  bioEl = headerEl?.querySelector('p')
 } = {}) {
   if (!body || !headerEl || !bioEl) return;
 
   const bioText = bioEl.textContent ?? '';
-  let bioAnimated = false;
-  let linksVisible = false;
-  const initialCompactBio = !shouldShowEnterWorld({ viewportWidth: window.innerWidth });
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const initialCompactBio = shouldUseCompactBio({ viewportWidth: window.innerWidth });
 
   const syncBioLayout = () => {
-    const useCompactBio = !shouldShowEnterWorld({ viewportWidth: window.innerWidth });
+    const useCompactBio = shouldUseCompactBio({ viewportWidth: window.innerWidth });
 
     if (useCompactBio) {
       if (bioEl.dataset.bioLayout !== 'compact') {
@@ -164,22 +194,25 @@ export function initializeSite({
     }
   };
 
-  const syncCoverRevealState = () => {
-    const reveal = getCoverRevealState({
-      bioAnimated,
-      linksVisible,
-      allowButton: shouldShowEnterWorld({ viewportWidth: window.innerWidth })
-    });
+  queueShaderLoad({ body, shaderFrame });
 
-    body.classList.toggle('is-cover-revealed', reveal.buttonVisible);
-  };
+  if (!bioText) {
+    body.classList.add('is-cover-heading-visible', 'is-cover-social-visible');
+    return;
+  }
 
   let bioDuration = 0;
 
-  if (bioText && !initialCompactBio) {
+  if (prefersReducedMotion) {
+    syncBioLayout();
+    body.classList.add('is-cover-heading-visible', 'is-cover-social-visible');
+    return;
+  }
+
+  if (!initialCompactBio) {
     primeSplitFlapText(bioEl, bioText);
     bioDuration = getSplitFlapDuration(bioText);
-  } else if (bioText) {
+  } else {
     renderCompactBioMarkup(bioEl, bioText, { animated: true });
     bioEl.dataset.bioLayout = 'compact';
     bioDuration = getCompactBioDuration(bioText);
@@ -191,36 +224,23 @@ export function initializeSite({
     body.classList.add('is-cover-heading-visible');
   }, HEADING_REVEAL_DELAY_MS);
 
-  if (bioText && !initialCompactBio) {
+  if (!initialCompactBio) {
     window.setTimeout(() => {
       playSplitFlap(bioEl, bioText);
     }, bioStartDelay);
-  } else if (bioText) {
+  } else {
     window.setTimeout(() => {
       playCompactBio(bioEl, bioText);
     }, bioStartDelay);
   }
 
   window.setTimeout(() => {
-    bioAnimated = true;
     body.classList.add('is-cover-social-visible');
-    syncCoverRevealState();
   }, bioStartDelay + bioDuration);
-
-  const socialDuration = Math.max(0, socialItems.length - 1) * SOCIAL_STAGGER_MS + SOCIAL_REVEAL_DURATION_MS;
-  const ctaDelay = Math.max(
-    COVER_REVEAL_DELAY_MS,
-    bioStartDelay + bioDuration + socialDuration
-  );
-
-  window.setTimeout(() => {
-    linksVisible = true;
-    syncCoverRevealState();
-  }, ctaDelay);
 
   window.addEventListener('resize', () => {
     syncBioLayout();
-    syncCoverRevealState();
+    queueShaderLoad({ body, shaderFrame });
   }, { passive: true });
 }
 

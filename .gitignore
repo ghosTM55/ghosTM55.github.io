@@ -2,3 +2,6 @@
 
 # Repository-specific local-only artifacts.
 tests/
+docs/superpowers/
+.codex/
+.claude/
