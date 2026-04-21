@@ -1514,34 +1514,119 @@ body.page-en {
 		font-size: 12pt;
 	}
 
-	#cover-main {
-		padding: 2rem 1rem 3rem;
-	}
-
-	#cover-social ul {
-		gap: 0.55rem;
-	}
-
-	#cover-social a {
-		min-height: 2.95rem;
-		padding: 0.78rem 1.05rem;
-		font-size: 0.8rem;
-	}
-
-	#cover-social .social-icon {
-		width: 1.2rem;
-		height: 1.2rem;
-		margin-right: 0.55rem;
-		font-size: 0.98rem;
+	#cover {
+		align-items: stretch;
 	}
 
 	#enter-world {
-		width: auto;
-		max-width: min(100%, 34rem);
-		bottom: 2.8rem;
-		padding: 1.55rem 2rem;
-		font-size: 1.15rem;
+		display: none;
+	}
+
+	#cover-main {
+		width: 100%;
+		min-height: 100vh;
+		min-height: 100dvh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding:
+			max(1.4rem, env(safe-area-inset-top))
+			1rem
+			max(1.5rem, env(safe-area-inset-bottom));
+	}
+
+	#cover-copy {
+		position: relative;
+		top: auto;
+		left: auto;
+		transform: none;
+		width: min(100%, 23.5rem);
+		margin: 0 auto;
+		padding: 0 0.7rem;
+		border: 0;
+		border-radius: 0;
+		background: none;
+		box-shadow: none;
+		backdrop-filter: none;
+	}
+
+	#header h1 {
+		font-size: clamp(1.7rem, 9.5vw, 3rem);
+		letter-spacing: 0.045em;
+		line-height: 0.9;
+		white-space: nowrap;
+	}
+
+	#header p {
+		margin: 0.95rem auto 0;
+		max-width: 18.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.55rem 0.45rem;
+		font-size: 0.77rem;
+		line-height: 1.4;
+		letter-spacing: 0.08em;
+	}
+
+	#header p .bio-chip {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 1.95rem;
+		padding: 0.36rem 0.72rem;
+		border: 1px solid rgba(103, 213, 255, 0.22);
+		border-radius: 999px;
+		background: rgba(4, 18, 31, 0.72);
+		box-shadow: 0 0 0 1px rgba(218, 248, 255, 0.03) inset;
+		white-space: nowrap;
+		color: rgba(218, 248, 255, 0.82);
+		opacity: 0;
+		transform: translate3d(0, 0.45rem, 0);
+		transition: opacity 0.24s ease, transform 0.24s ease;
+	}
+
+	#header p .bio-chip.is-visible {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+
+	#header p .bio-chip__text {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#cover-social ul {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 0.65rem;
+		width: min(100%, 20rem);
+		margin: 0 auto;
+	}
+
+	#cover-social li {
+		width: 100%;
+	}
+
+	#cover-social a {
+		width: 100%;
+		justify-content: center;
+		gap: 0.72rem;
+		min-height: 3rem;
+		padding: 0.9rem 1rem;
+		border-radius: 1rem;
+		font-size: 0.78rem;
 		letter-spacing: 0.1em;
+		text-align: center;
+	}
+
+	#cover-social .social-icon {
+		width: 1.12rem;
+		height: 1.12rem;
+		margin-right: 0;
+		flex: 0 0 1.12rem;
+		font-size: 1rem;
 	}
 
 	.en-panel {
