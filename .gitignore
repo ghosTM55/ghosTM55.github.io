@@ -1,7 +1,4 @@
 .worktrees/
 
-# Local AI agent working notes, plans, and specs should stay out of the repo.
-docs/superpowers/
-.codex/
-.claude/
+# Repository-specific local-only artifacts.
 tests/
