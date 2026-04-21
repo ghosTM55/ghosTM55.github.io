@@ -3,34 +3,13 @@ const HEADING_REVEAL_DELAY_MS = 500;
 const HEADING_FADE_DURATION_MS = 420;
 const SOCIAL_STAGGER_MS = 55;
 const SOCIAL_REVEAL_DURATION_MS = 180;
-const ENTER_WORLD_MIN_WIDTH = 737;
-
-export function shouldShowEnterWorld({ viewportWidth } = {}) {
-  return typeof viewportWidth !== 'number' || viewportWidth >= ENTER_WORLD_MIN_WIDTH;
-}
-
-export function getBioSegments(bioText = '') {
-  return bioText
-    .split('\u2022')
-    .map((segment) => segment.replace(/\s+/g, ' ').trim())
-    .filter(Boolean);
-}
-
-function getCompactBioDuration(bioText) {
-  const chipDelay = 120;
-
-  return getBioSegments(bioText).reduce((total, segment, index) => (
-    Math.max(total, (index * chipDelay) + getSplitFlapDuration(segment))
-  ), 0) + 120;
-}
 
 export function getCoverRevealState({
   bioAnimated,
-  linksVisible,
-  allowButton = true
+  linksVisible
 }) {
   return {
-    buttonVisible: Boolean(bioAnimated && linksVisible && allowButton)
+    buttonVisible: Boolean(bioAnimated && linksVisible)
   };
 }
 
@@ -52,46 +31,6 @@ function getSplitFlapDuration(bioText) {
   const lastAnimatedIndex = revealableIndexes.at(-1) ?? 0;
 
   return (lastAnimatedIndex * charDelay) + (flips * flipMs) + 120;
-}
-
-function renderCompactBioMarkup(bioEl, bioText, { animated = false } = {}) {
-  const fragment = document.createDocumentFragment();
-
-  getBioSegments(bioText).forEach((segment) => {
-    const chip = document.createElement('span');
-    chip.className = 'bio-chip';
-    const text = document.createElement('span');
-    text.className = 'bio-chip__text';
-
-    if (animated) {
-      primeSplitFlapText(text, segment);
-    } else {
-      text.textContent = segment;
-      chip.classList.add('is-visible');
-    }
-
-    chip.appendChild(text);
-    fragment.appendChild(chip);
-  });
-
-  bioEl.replaceChildren(fragment);
-}
-
-function playCompactBio(bioEl, bioText) {
-  const chipDelay = 120;
-  const chips = Array.from(bioEl.querySelectorAll('.bio-chip'));
-  const segments = getBioSegments(bioText);
-
-  chips.forEach((chip, index) => {
-    const textEl = chip.querySelector('.bio-chip__text');
-    const segment = segments[index];
-    if (!textEl || !segment) return;
-
-    window.setTimeout(() => {
-      chip.classList.add('is-visible');
-      playSplitFlap(textEl, segment);
-    }, index * chipDelay);
-  });
 }
 
 function playSplitFlap(bioEl, bioText) {
@@ -143,46 +82,11 @@ export function initializeSite({
   if (!body || !headerEl || !bioEl) return;
 
   const bioText = bioEl.textContent ?? '';
-  let bioAnimated = false;
-  let linksVisible = false;
-  const initialCompactBio = !shouldShowEnterWorld({ viewportWidth: window.innerWidth });
-
-  const syncBioLayout = () => {
-    const useCompactBio = !shouldShowEnterWorld({ viewportWidth: window.innerWidth });
-
-    if (useCompactBio) {
-      if (bioEl.dataset.bioLayout !== 'compact') {
-        renderCompactBioMarkup(bioEl, bioText, { animated: false });
-        bioEl.dataset.bioLayout = 'compact';
-      }
-      return;
-    }
-
-    if (bioEl.dataset.bioLayout === 'compact') {
-      bioEl.textContent = bioText;
-      delete bioEl.dataset.bioLayout;
-    }
-  };
-
-  const syncCoverRevealState = () => {
-    const reveal = getCoverRevealState({
-      bioAnimated,
-      linksVisible,
-      allowButton: shouldShowEnterWorld({ viewportWidth: window.innerWidth })
-    });
-
-    body.classList.toggle('is-cover-revealed', reveal.buttonVisible);
-  };
 
   let bioDuration = 0;
-
-  if (bioText && !initialCompactBio) {
+  if (bioText) {
     primeSplitFlapText(bioEl, bioText);
     bioDuration = getSplitFlapDuration(bioText);
-  } else if (bioText) {
-    renderCompactBioMarkup(bioEl, bioText, { animated: true });
-    bioEl.dataset.bioLayout = 'compact';
-    bioDuration = getCompactBioDuration(bioText);
   }
 
   const bioStartDelay = HEADING_REVEAL_DELAY_MS + HEADING_FADE_DURATION_MS;
@@ -191,20 +95,14 @@ export function initializeSite({
     body.classList.add('is-cover-heading-visible');
   }, HEADING_REVEAL_DELAY_MS);
 
-  if (bioText && !initialCompactBio) {
+  if (bioText) {
     window.setTimeout(() => {
       playSplitFlap(bioEl, bioText);
-    }, bioStartDelay);
-  } else if (bioText) {
-    window.setTimeout(() => {
-      playCompactBio(bioEl, bioText);
     }, bioStartDelay);
   }
 
   window.setTimeout(() => {
-    bioAnimated = true;
     body.classList.add('is-cover-social-visible');
-    syncCoverRevealState();
   }, bioStartDelay + bioDuration);
 
   const socialDuration = Math.max(0, socialItems.length - 1) * SOCIAL_STAGGER_MS + SOCIAL_REVEAL_DURATION_MS;
@@ -214,14 +112,15 @@ export function initializeSite({
   );
 
   window.setTimeout(() => {
-    linksVisible = true;
-    syncCoverRevealState();
-  }, ctaDelay);
+    const reveal = getCoverRevealState({
+      bioAnimated: true,
+      linksVisible: true
+    });
 
-  window.addEventListener('resize', () => {
-    syncBioLayout();
-    syncCoverRevealState();
-  }, { passive: true });
+    if (reveal.buttonVisible) {
+      body.classList.add('is-cover-revealed');
+    }
+  }, ctaDelay);
 }
 
 function bootstrapSite() {
