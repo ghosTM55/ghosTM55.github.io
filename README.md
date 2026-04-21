@@ -53,6 +53,6 @@ The following social accounts are configured. To restore the social links nav se
 **Icon notes:**
 - All icons use Font Awesome 6 Free via jsdelivr CDN
 - `fa-tiktok` is used for both 抖音 and TikTok (same logo, different regional brands)
-- Hashnode uses a custom SVG `background-image` on `::before` (defined in `main.css` as `.icon.hashnode`)
+- Hashnode uses a CSS-drawn rounded diamond with a center cutout on `::before`, matching the official icon silhouette while preserving the site's existing color system
 - On hover, only 抖音 and TikTok show a label tooltip — targeted via `a[href*="douyin"]` and `a[href*="tiktok"]` attribute selectors in CSS
 - Tooltip uses `system-ui` font

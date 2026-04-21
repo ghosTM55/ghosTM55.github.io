@@ -107,10 +107,11 @@ a {
 
 .icon.hashnode:before {
 	content: '';
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 337 337'%3E%3Cpath fill='%23daf8ff' fill-rule='evenodd' d='M62.432 60.37C90.716 30.616 130.363 12 174.194 12c43.83 0 83.477 18.616 111.761 48.37C314.239 90.124 330 130.573 330 175.056c0 44.482-15.761 84.931-44.045 114.685C257.671 319.495 218.024 338 174.194 338c-43.83 0-83.477-18.505-111.762-48.259C34.148 259.987 18.387 219.538 18.387 175.056c0-44.483 15.761-84.932 44.045-114.686zm109.48 174.51c22.15 22.15 58.041 22.15 80.192 0 22.15-22.15 22.15-58.04 0-80.191-22.15-22.15-58.041-22.15-80.191 0-22.15 22.15-22.15 58.04 0 80.19z'/%3E%3C/svg%3E");
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 100%;
+	width: 1.05em;
+	height: 1.05em;
+	border-radius: 0.26em;
+	background: radial-gradient(circle at center, transparent 0 24%, currentColor 25% 100%);
+	transform: rotate(45deg);
 }
 
 @keyframes wrapper {
