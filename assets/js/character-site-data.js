@@ -552,7 +552,9 @@ const questEntryRecords = [
     outcome: 'Assembled builders for Hong Kong Cyberport’s first hackathon.',
     traits: ['Builder Assembly', 'Event Execution', 'Hong Kong Bridge'],
     notes: 'A public commission: gather the party for Cyberport, set the arena, and let the builders reveal what is possible.',
-    ...questImage('quest-cyberport-hackathon.svg', 'Green cyan hackathon assembly visual for Cyberport Hackathon'),
+    ...questImage('cyberport-logo-green-cyan.png', 'Green cyan Cyberport logo for Cyberport Hackathon', {
+      mediaLayout: 'contain'
+    }),
     placeholderLabel: 'Cyberport Hackathon Quest Placeholder'
   },
   {
