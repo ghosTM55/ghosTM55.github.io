@@ -2959,6 +2959,44 @@ body.page-character.is-preload #character-app {
 	color: rgba(132, 235, 255, 0.92);
 }
 
+@media screen and (min-width: 1181px) {
+	.page-character .slide-stage {
+		padding: clamp(0.75rem, 1.25vw, 1.25rem);
+	}
+
+	.page-character .slide-screen {
+		padding-top: 0.75rem;
+	}
+
+	.page-character .slide-panel[data-slide="character-overview"] {
+		grid-template-columns: minmax(17rem, 0.78fr) minmax(30rem, 1.34fr) minmax(20rem, 0.96fr);
+		gap: clamp(0.75rem, 1vw, 1.1rem);
+		padding: clamp(0.85rem, 1.2vw, 1.2rem);
+	}
+
+	.page-character .character-radar {
+		align-content: stretch;
+		grid-template-rows: auto minmax(0, 1fr);
+	}
+
+	.page-character .character-radar__identity,
+	.page-character .character-radar__frame {
+		width: 100%;
+		max-width: none;
+	}
+
+	.page-character .character-radar__frame {
+		align-content: center;
+		justify-items: center;
+		min-height: 0;
+	}
+
+	.page-character .character-radar__graph {
+		width: min(100%, 72vh, 56rem);
+		max-width: none;
+	}
+}
+
 .page-character .character-detail__panel {
 	gap: 0.9rem;
 	height: 100%;
