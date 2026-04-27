@@ -1,3 +1,5 @@
+import { questImage } from './character/assets.js';
+
 export const slideOrder = ['character-overview', 'starting-stats', 'quests', 'achievements'];
 
 export const slideDefinitions = [
@@ -415,8 +417,7 @@ const questEntryRecords = [
     outcome: 'Taste the full range of being alive: the sweet, the bitter, the playful, and the strange.',
     traits: ['Curiosity', 'Range', 'Playful Agency'],
     notes: 'Not a doctrine of perfecting one thing forever. The point is to keep trying the whole map.',
-    mediaSrc: '../assets/images/quests/quest-prime-directive.svg?v=enjoy-life-icon-20260427',
-    mediaAlt: 'Green cyan symbolic quest visual for Enjoy Life',
+    ...questImage('quest-prime-directive.svg', 'Green cyan symbolic quest visual for Enjoy Life'),
     placeholderLabel: 'Enjoy Life Quest Placeholder'
   },
   {
@@ -429,10 +430,10 @@ const questEntryRecords = [
     outcome: 'Building a next-generation AI entertainment studio for new IP operations and higher-dimensional screen experiences.',
     traits: ['AI Entertainment', 'IP Operations', 'Film x Technology'],
     notes: 'A newly opened mainline quest: assemble a strong cross-industry team, bridge film and technology, and face the hard problems of a new entertainment era.',
-    mediaSrc: '../assets/images/quests/nong-studio-watermark.png?v=nong-studio-wide-icon-20260427',
-    mediaAlt: 'NONG Studio logo',
-    mediaLayout: 'wide',
-    mediaAspect: '965 / 156',
+    ...questImage('nong-studio-watermark.png', 'NONG Studio logo', {
+      mediaLayout: 'wide',
+      mediaAspect: '965 / 156'
+    }),
     placeholderLabel: 'NONG Studio Quest Placeholder'
   },
   {
@@ -445,9 +446,9 @@ const questEntryRecords = [
     outcome: 'Built China\'s first GitHub-like service and sold it to Tencent at 25.',
     traits: ['Open Source Culture', 'Developer Tools', 'Education Bridge'],
     notes: 'The first startup quest: connect open-source communities, commercial projects, and schools so more students could touch real code and real collaboration.',
-    mediaSrc: '../assets/images/quests/gitcafe-logo.png?v=gitcafe-uploaded-logo-20260427',
-    mediaAlt: 'GitCafe logo',
-    mediaLayout: 'contain',
+    ...questImage('gitcafe-logo.png', 'GitCafe logo', {
+      mediaLayout: 'contain'
+    }),
     placeholderLabel: 'GitCafe Quest Placeholder'
   },
   {
@@ -460,9 +461,9 @@ const questEntryRecords = [
     outcome: 'Led Asia\'s largest urban hacker community and multiplied its activity before handing it to the next stewards.',
     traits: ['Hacker Culture', 'Open Source Community', 'Weekly Gatherings'],
     notes: 'A legendary guild hall founded in 1997: open-source talks, weekly meetups, hands-on hardware, new technology, and a community that had already shaped China\'s open-source scene.',
-    mediaSrc: '../assets/images/quests/shlug-logo.png?v=shlug-transparent-square-20260427',
-    mediaAlt: 'Shanghai Linux User Group logo',
-    mediaLayout: 'square-logo',
+    ...questImage('shlug-logo.png', 'Shanghai Linux User Group logo', {
+      mediaLayout: 'square-logo'
+    }),
     placeholderLabel: 'Shanghai Linux User Group Quest Placeholder'
   },
   {
@@ -475,9 +476,9 @@ const questEntryRecords = [
     outcome: 'Co-founded KaiYuanShe through GitCafe with Microsoft Open Technologies to promote open source across China.',
     traits: ['Open Source Advocacy', 'University Outreach', 'Industry Reports'],
     notes: 'A guild quest for making open source practical in China\'s commercial environment: campus outreach, industry-facing reports, and long-term community succession.',
-    mediaSrc: '../assets/images/quests/kaiyuanshe-logo.png?v=kaiyuanshe-uploaded-logo-20260427',
-    mediaAlt: 'KaiYuanShe logo',
-    mediaLayout: 'square-logo-large',
+    ...questImage('kaiyuanshe-logo.png', 'KaiYuanShe logo', {
+      mediaLayout: 'square-logo-large'
+    }),
     placeholderLabel: 'KaiYuanShe Quest Placeholder'
   },
   {
@@ -490,9 +491,9 @@ const questEntryRecords = [
     outcome: 'Co-founded a government-supported AI lab with Shanghai Jiao Tong University\'s AI Institute to connect government, academia, and industry.',
     traits: ['Government-Backed AI', 'Academic Collaboration', 'AI for Science'],
     notes: 'An institutional platform quest for AI research, public-sector support, and commercial collaboration, later evolving toward AI for Science.',
-    mediaSrc: '../assets/images/quests/baiyulan-logo.png?v=baiyulan-uploaded-logo-20260427',
-    mediaAlt: 'Shanghai BaiYuLan AI Open Lab logo',
-    mediaLayout: 'square-logo-large'
+    ...questImage('baiyulan-logo.png', 'Shanghai BaiYuLan AI Open Lab logo', {
+      mediaLayout: 'square-logo-large'
+    })
   },
   {
     id: 'tsinghua-xlp',
@@ -504,10 +505,10 @@ const questEntryRecords = [
     outcome: 'Built the assignment-tracking system and supported teaching for Tsinghua University\'s Extreme Learning Programme.',
     traits: ['Extreme Learning', 'Course Infrastructure', 'Learning Methodology'],
     notes: 'A royal commission for one of Tsinghua\'s most radical experimental courses, designed to teach students how to rapidly master a new field in a compressed timeframe.',
-    mediaSrc: '../assets/images/quests/xlp-logo.png?v=tsinghua-xlp-logo-20260427',
-    mediaAlt: 'Tsinghua University logo for XLP',
-    mediaLayout: 'wide',
-    mediaAspect: '2270 / 1072',
+    ...questImage('xlp-logo.png', 'Tsinghua University logo for XLP', {
+      mediaLayout: 'wide',
+      mediaAspect: '2270 / 1072'
+    }),
     placeholderLabel: 'Tsinghua XLP Quest Placeholder'
   },
   {
@@ -520,10 +521,10 @@ const questEntryRecords = [
     outcome: 'Built toward AI digital humans, synthetic characters, and interactive identity systems.',
     traits: ['AI Digital Humans', 'Interactive Identity', 'Synthetic Characters'],
     notes: 'The strange-tech questline: make characters feel less like content and more like presences you can meet.',
-    mediaSrc: '../assets/images/quests/realnpc-logo.png?v=realnpc-logo-20260427',
-    mediaAlt: 'Green cyan RealNPC logo',
-    mediaLayout: 'wide',
-    mediaAspect: '2253 / 701',
+    ...questImage('realnpc-logo.png', 'Green cyan RealNPC logo', {
+      mediaLayout: 'wide',
+      mediaAspect: '2253 / 701'
+    }),
     placeholderLabel: 'RealNPC Quest Placeholder'
   },
   {
@@ -536,9 +537,9 @@ const questEntryRecords = [
     outcome: 'Founded China\'s first women-in-tech community for beginners crossing into technology.',
     traits: ['Women in Tech', 'Beginner Education', 'Community Events'],
     notes: 'A teaching and sharing community for women from different industries with no technical background, with well-received events across major cities including Beijing and Shanghai.',
-    mediaSrc: '../assets/images/quests/techiecat-logo.png?v=techiecat-script-logo-20260427',
-    mediaAlt: 'TechieCat logo',
-    mediaLayout: 'square-logo-large',
+    ...questImage('techiecat-logo.png', 'TechieCat logo', {
+      mediaLayout: 'square-logo-large'
+    }),
     placeholderLabel: 'TechieCat Quest Placeholder'
   },
   {
@@ -551,8 +552,7 @@ const questEntryRecords = [
     outcome: 'Assembled builders for Hong Kong Cyberport’s first hackathon.',
     traits: ['Builder Assembly', 'Event Execution', 'Hong Kong Bridge'],
     notes: 'A public commission: gather the party for Cyberport, set the arena, and let the builders reveal what is possible.',
-    mediaSrc: '../assets/images/quests/quest-cyberport-hackathon.svg',
-    mediaAlt: 'Green cyan hackathon assembly visual for Cyberport Hackathon',
+    ...questImage('quest-cyberport-hackathon.svg', 'Green cyan hackathon assembly visual for Cyberport Hackathon'),
     placeholderLabel: 'Cyberport Hackathon Quest Placeholder'
   },
   {
@@ -565,10 +565,10 @@ const questEntryRecords = [
     outcome: 'Ecosystem building experiment for the Web3 industry.',
     traits: ['Developer Ecosystems', 'Hackathon Systems', 'Founder Boundary'],
     notes: 'An arcane trial applying open-source community operations to Web3: build hackathon infrastructure, organize builder events, and test project incubation under volatile industry incentives.',
-    mediaSrc: '../assets/images/quests/bewater-logo.png?v=bewater-logotype-20260427',
-    mediaAlt: 'Green cyan BeWater logo',
-    mediaLayout: 'wide',
-    mediaAspect: '1156 / 344',
+    ...questImage('bewater-logo.png', 'Green cyan BeWater logo', {
+      mediaLayout: 'wide',
+      mediaAspect: '1156 / 344'
+    }),
     placeholderLabel: 'BeWater Quest Placeholder'
   },
   {
@@ -581,9 +581,9 @@ const questEntryRecords = [
     outcome: 'Tested an avatar-based group video world before the category had settled language.',
     traits: ['Category Instinct', 'Avatar Expression', 'Social Experimentation'],
     notes: 'An unstable spell: faces, rooms, video, identity, and play, all before the market had clean words for it.',
-    mediaSrc: '../assets/images/quests/quest-doutu.svg?v=doutu-sticker-icon-20260427',
-    mediaAlt: 'Green cyan meme sticker icon for DouTu',
-    mediaLayout: 'contain',
+    ...questImage('quest-doutu.svg', 'Green cyan meme sticker icon for DouTu', {
+      mediaLayout: 'contain'
+    }),
     placeholderLabel: 'DouTu Quest Placeholder'
   },
   {
@@ -596,9 +596,9 @@ const questEntryRecords = [
     outcome: 'Trains precise problem targeting and behavioral consistency.',
     traits: ['Problem Targeting', 'Behavioral Consistency', 'Learning Methodology'],
     notes: 'Archery rewards patient refinement: every shot depends on 30+ details landing together, which quickly filters out anyone chasing fast visible results.',
-    mediaSrc: '../assets/images/quests/archery.png?v=archery-uploaded-icon-20260427',
-    mediaAlt: 'Green cyan archery mastery visual',
-    mediaLayout: 'contain',
+    ...questImage('archery.png', 'Green cyan archery mastery visual', {
+      mediaLayout: 'contain'
+    }),
     placeholderLabel: 'Archery Quest Placeholder'
   },
   {
@@ -611,9 +611,9 @@ const questEntryRecords = [
     outcome: 'My defining teenage pursuit, built on team play, tactics, and disciplined fundamentals.',
     traits: ['Team Collaboration', 'Tactical Literacy', 'Fundamentals Training'],
     notes: 'Basketball became my most important youth pursuit: early professional-standard training, a mentor who founded CSBA, and a path redirected by ankle and ligament injuries.',
-    mediaSrc: '../assets/images/quests/basketball.png?v=basketball-uploaded-icon-20260427',
-    mediaAlt: 'Green cyan basketball tempo visual',
-    mediaLayout: 'contain',
+    ...questImage('basketball.png', 'Green cyan basketball tempo visual', {
+      mediaLayout: 'contain'
+    }),
     placeholderLabel: 'Basketball Quest Placeholder'
   },
   {
@@ -626,9 +626,9 @@ const questEntryRecords = [
     outcome: 'Competitive drive, fast reactions, high-difficulty mastery, and deep love for single-player worlds.',
     traits: ['Competitive Instinct', 'Reaction Speed', 'World Immersion'],
     notes: 'Gaming spans both sides for me: the urge to win in competitive arenas and the slower pleasure of art, story, worldbuilding, and imagination in single-player games.',
-    mediaSrc: '../assets/images/quests/gamepad.png?v=gaming-uploaded-icon-20260427',
-    mediaAlt: 'Green cyan hardcore gaming strategy visual',
-    mediaLayout: 'contain',
+    ...questImage('gamepad.png', 'Green cyan hardcore gaming strategy visual', {
+      mediaLayout: 'contain'
+    }),
     placeholderLabel: 'Gaming Quest Placeholder'
   },
   {
@@ -641,9 +641,9 @@ const questEntryRecords = [
     outcome: 'A practice of line control, restraint, form, and visible discipline.',
     traits: ['Line Control', 'Aesthetic Discipline', 'Restraint'],
     notes: 'Ink does not hide the hand. This quest trains control, space, rhythm, and respect for form.',
-    mediaSrc: '../assets/images/quests/maobi.png?v=calligraphy-uploaded-icon-20260427',
-    mediaAlt: 'Green cyan calligraphy discipline visual',
-    mediaLayout: 'contain',
+    ...questImage('maobi.png', 'Green cyan calligraphy discipline visual', {
+      mediaLayout: 'contain'
+    }),
     placeholderLabel: 'Calligraphy Quest Placeholder'
   }
 ];

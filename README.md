@@ -19,3 +19,8 @@ This is an experimental personal website project.
 It is my first website experiment built with Codex. I did not use design-focused skills or additional design tools; the site was shaped mainly through prompt-based iteration. I used my own personal website as the test case, and I think the result turned out reasonably well.
 
 On desktop, the homepage includes an `ssh -Y $THOMAS@earth` entry point into the main experience. On mobile, that entry point is currently hidden.
+
+## Maintenance Notes
+
+- CSS source of truth: the published styles are edited directly in `assets/css/landing.css` and `assets/css/main.css`.
+- The old HTML5 UP Sass source was removed because it no longer represented the shipped CSS.
