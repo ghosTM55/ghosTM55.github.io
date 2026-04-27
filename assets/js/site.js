@@ -7,6 +7,14 @@ const SOCIAL_STAGGER_MS = 55;
 const SOCIAL_REVEAL_DURATION_MS = 180;
 const ENTER_TRANSITION_DURATION_MS = 3100;
 const ENTER_TRANSITION_REDUCED_DURATION_MS = 80;
+const CHARACTER_RESOURCE_HINTS = [
+  { href: '/character/', rel: 'prefetch', as: 'document' },
+  { href: '/assets/css/fontawesome-all.min.css', rel: 'preload', as: 'style' },
+  { href: '/assets/css/main.css?v=nong-studio-wide-card-20260427', rel: 'preload', as: 'style' },
+  { href: '/assets/js/character-site-data.js?v=character-url-migration-v2-20260427', rel: 'modulepreload' },
+  { href: '/assets/js/character-site.js?v=character-url-migration-v2-20260427', rel: 'modulepreload' },
+  { href: '/assets/portrait.jpg', rel: 'preload', as: 'image' }
+];
 
 function shouldUseCompactBio({ viewportWidth } = {}) {
   return typeof viewportWidth === 'number' && viewportWidth < COMPACT_BIO_MIN_WIDTH;
@@ -170,6 +178,34 @@ function queueShaderLoad({ body, shaderFrame }) {
   }
 }
 
+function preloadCharacterResources({
+  doc = document,
+  win = window
+} = {}) {
+  if (doc?.head) {
+    CHARACTER_RESOURCE_HINTS.forEach((hint) => {
+      const link = doc.createElement('link');
+      link.rel = hint.rel;
+      link.href = hint.href;
+
+      if (hint.as) {
+        link.as = hint.as;
+      }
+
+      doc.head.appendChild(link);
+    });
+  }
+
+  if (typeof Image === 'undefined') return;
+
+  const portraitImage = new Image();
+  portraitImage.decoding = 'async';
+  portraitImage.src = '/assets/portrait.jpg';
+  win.__characterPortraitPreload = portraitImage;
+
+  portraitImage.decode?.().catch(() => {});
+}
+
 function initializeSite({
   body = document.body,
   shaderFrame = document.getElementById('cover-shader'),
@@ -266,6 +302,7 @@ function initializeEnterTransition({
   transitionLayer = document.getElementById('page-transition'),
   win = window,
   setTimeoutFn = window.setTimeout.bind(window),
+  resourcePreloader = preloadCharacterResources,
 } = {}) {
   if (!body || !enterLink || !transitionLayer || !win) return;
 
@@ -282,6 +319,13 @@ function initializeEnterTransition({
 
     event.preventDefault();
     enterLink.dataset.transitioning = 'true';
+
+    try {
+      resourcePreloader?.({ targetHref, win });
+    } catch {
+      // Resource hints are opportunistic; navigation must stay reliable.
+    }
+
     body.classList.add('is-enter-transitioning');
     transitionLayer.classList.add('is-active');
     transitionLayer.setAttribute('aria-hidden', 'false');
