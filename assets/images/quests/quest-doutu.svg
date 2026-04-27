@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">DouTu sticker icon</title>
+  <desc id="desc">Transparent green cyan meme sticker icon for DouTu.</desc>
+  <defs>
+    <linearGradient id="cyanGreen" x1="12%" x2="88%" y1="10%" y2="90%">
+      <stop offset="0" stop-color="#69dfff"/>
+      <stop offset=".5" stop-color="#00e0b8"/>
+      <stop offset="1" stop-color="#d8ffee"/>
+    </linearGradient>
+    <radialGradient id="stickerFill" cx="50%" cy="45%" r="58%">
+      <stop offset="0" stop-color="#97ffdc" stop-opacity=".2"/>
+      <stop offset=".72" stop-color="#00e0b8" stop-opacity=".08"/>
+      <stop offset="1" stop-color="#69dfff" stop-opacity=".02"/>
+    </radialGradient>
+    <filter id="halo" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.00 0 0 0 0 1.00 0 0 0 0 0.82 0 0 0 .86 0" result="cyanBlur"/>
+      <feMerge>
+        <feMergeNode in="cyanBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="tightGlow" x="-45%" y="-45%" width="190%" height="190%">
+      <feGaussianBlur stdDeviation="5" result="soft"/>
+      <feMerge>
+        <feMergeNode in="soft"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="translate(112 112)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M176 40h366c38 0 66 12 93 39l86 86c27 27 39 55 39 93v366c0 75-61 136-136 136H176c-75 0-136-61-136-136V176C40 101 101 40 176 40Z"
+          fill="#00e0b8" fill-opacity=".22" stroke="#00e0b8" stroke-opacity=".28" stroke-width="46" filter="url(#halo)"/>
+    <path d="M176 40h366c38 0 66 12 93 39l86 86c27 27 39 55 39 93v366c0 75-61 136-136 136H176c-75 0-136-61-136-136V176C40 101 101 40 176 40Z"
+          fill="url(#stickerFill)" stroke="url(#cyanGreen)" stroke-width="28" filter="url(#tightGlow)"/>
+    <path d="M552 48v138c0 37 30 67 67 67h138"
+          stroke="#d8ffee" stroke-opacity=".92" stroke-width="24" filter="url(#tightGlow)"/>
+    <path d="M590 82l130 130"
+          stroke="#69dfff" stroke-opacity=".62" stroke-width="16"/>
+    <g stroke="#d8ffee" stroke-width="28" filter="url(#tightGlow)">
+      <path d="M270 356h2"/>
+      <path d="M530 356h2"/>
+      <path d="M282 534c70 62 166 62 236 0"/>
+    </g>
+    <g stroke="url(#cyanGreen)" stroke-width="20">
+      <path d="M210 232c44-38 110-38 154 0"/>
+      <path d="M438 232c44-38 110-38 154 0"/>
+      <path d="M196 650c132 56 276 58 408 0"/>
+    </g>
+  </g>
+</svg>

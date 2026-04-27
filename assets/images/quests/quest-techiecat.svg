@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">TechieCat quest visual</title>
+  <desc id="desc">Green cyan monochrome RPG quest briefing visual for TechieCat.</desc>
+  <defs>
+    <linearGradient id="hot" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#69dfff"/>
+      <stop offset=".55" stop-color="#97ffdc"/>
+      <stop offset="1" stop-color="#d8ffee"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="45%" r="55%">
+      <stop offset="0" stop-color="#97ffdc" stop-opacity=".18"/>
+      <stop offset=".58" stop-color="#69dfff" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#02080e" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0v42" fill="none" stroke="#69dfff" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <style>
+      .label{font:700 54px Quantico,Arial,sans-serif;letter-spacing:.12em;fill:#d8ffee}
+      .sub{font:700 19px Quantico,Arial,sans-serif;letter-spacing:.24em;fill:#97ffdc;opacity:.78}
+      .mark{font:700 86px Quantico,Arial,sans-serif;letter-spacing:.04em;fill:#d8ffee}
+    </style>
+  </defs>
+  <rect width="1200" height="675" fill="#02080e"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <circle cx="600" cy="300" r="285" fill="url(#core)"/>
+  <path d="M140 112h920v451H140z" fill="none" stroke="#69dfff" stroke-opacity=".18" stroke-width="2"/>
+  <path d="M174 145h150M876 145h150M174 530h150M876 530h150" stroke="#97ffdc" stroke-opacity=".42" stroke-width="5" stroke-linecap="round"/>
+
+    <circle cx="600" cy="282" r="100" fill="rgba(105,223,255,.06)" stroke="url(#hot)" stroke-width="5"/>
+    <path d="M535 318 C570 260 630 260 665 318 M600 182 v205 M512 230 h176" fill="none" stroke="#d8ffee" stroke-width="8" stroke-linecap="round"/>
+
+  <text x="600" y="555" text-anchor="middle" class="label">TechieCat</text>
+  <text x="600" y="594" text-anchor="middle" class="sub">COMMUNITY FACTION</text>
+</svg>

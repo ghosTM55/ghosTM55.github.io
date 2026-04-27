@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Enjoy Life quest visual</title>
+  <desc id="desc">Green cyan monochrome RPG quest briefing visual for Enjoy Life.</desc>
+  <defs>
+    <linearGradient id="hot" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#69dfff"/>
+      <stop offset=".55" stop-color="#97ffdc"/>
+      <stop offset="1" stop-color="#d8ffee"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="45%" r="55%">
+      <stop offset="0" stop-color="#97ffdc" stop-opacity=".18"/>
+      <stop offset=".58" stop-color="#69dfff" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#02080e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="smiley" cx="42%" cy="34%" r="68%">
+      <stop offset="0" stop-color="#d8ffee"/>
+      <stop offset=".45" stop-color="#97ffdc"/>
+      <stop offset="1" stop-color="#1fc7ea"/>
+    </radialGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0v42" fill="none" stroke="#69dfff" stroke-opacity=".08" stroke-width="1"/>
+    </pattern>
+    <style>
+      .face-shadow{filter:drop-shadow(0 0 28px rgba(105,223,255,.2))}
+    </style>
+  </defs>
+  <rect width="1200" height="675" fill="#02080e"/>
+  <rect width="1200" height="675" fill="url(#grid)"/>
+  <circle cx="600" cy="332" r="285" fill="url(#core)"/>
+  <path d="M140 112h920v451H140z" fill="none" stroke="#69dfff" stroke-opacity=".18" stroke-width="2"/>
+  <path d="M174 145h150M876 145h150M174 530h150M876 530h150" stroke="#97ffdc" stroke-opacity=".42" stroke-width="5" stroke-linecap="round"/>
+  <g class="face-shadow" aria-label="Smiley face icon">
+    <circle cx="600" cy="332" r="168" fill="url(#smiley)" fill-opacity=".22" stroke="url(#hot)" stroke-width="10"/>
+    <circle cx="600" cy="332" r="142" fill="none" stroke="#d8ffee" stroke-opacity=".14" stroke-width="2"/>
+    <ellipse cx="543" cy="288" rx="22" ry="45" fill="#d8ffee"/>
+    <ellipse cx="657" cy="288" rx="22" ry="45" fill="#d8ffee"/>
+    <path d="M486 374c54 96 174 96 228 0" fill="none" stroke="#d8ffee" stroke-width="25" stroke-linecap="round"/>
+    <ellipse cx="478" cy="371" rx="30" ry="18" fill="#d8ffee" transform="rotate(-25 478 371)"/>
+    <ellipse cx="722" cy="371" rx="30" ry="18" fill="#d8ffee" transform="rotate(25 722 371)"/>
+    <circle cx="600" cy="332" r="188" fill="none" stroke="#69dfff" stroke-opacity=".14" stroke-width="2" stroke-dasharray="16 18"/>
+  </g>
+</svg>

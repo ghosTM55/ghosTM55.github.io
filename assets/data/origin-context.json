@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-04-18",
+  "shanghai": {
+    "label": "Shanghai population",
+    "value": "24.76M",
+    "context": "A dense, globally connected coastal city that framed early ambition and systems awareness.",
+    "source": {
+      "label": "Shanghai government overview",
+      "url": "https://english.shanghai.gov.cn/en-Overview/20231207/a0323b4c7b034212b00dc4171ea90915.html"
+    }
+  },
+  "china": {
+    "label": "China GDP growth",
+    "value": "5.0%",
+    "context": "Macro-scale growth formed the backdrop for internet infrastructure, competition, and opportunity.",
+    "source": {
+      "label": "National Bureau of Statistics of China 2025 communiqué",
+      "url": "https://www.stats.gov.cn/english/PressRelease/202602/t20260228_1962661.html"
+    }
+  },
+  "culturalInputs": [
+    "Games",
+    "Music",
+    "Film",
+    "Open source",
+    "Hacker culture"
+  ]
+}

@@ -1,7 +1,12 @@
+const COVER_REVEAL_DELAY_MS = 3000;
 const HEADING_REVEAL_DELAY_MS = 500;
 const HEADING_FADE_DURATION_MS = 420;
 const COMPACT_BIO_MIN_WIDTH = 737;
 const SHADER_IDLE_TIMEOUT_MS = 800;
+const SOCIAL_STAGGER_MS = 55;
+const SOCIAL_REVEAL_DURATION_MS = 180;
+const ENTER_TRANSITION_DURATION_MS = 3100;
+const ENTER_TRANSITION_REDUCED_DURATION_MS = 80;
 
 function shouldUseCompactBio({ viewportWidth } = {}) {
   return typeof viewportWidth === 'number' && viewportWidth < COMPACT_BIO_MIN_WIDTH;
@@ -169,7 +174,8 @@ function initializeSite({
   body = document.body,
   shaderFrame = document.getElementById('cover-shader'),
   headerEl = document.getElementById('header'),
-  bioEl = headerEl?.querySelector('p')
+  bioEl = headerEl?.querySelector('p'),
+  socialItems = Array.from(document.querySelectorAll('#cover-social li'))
 } = {}) {
   if (!body || !headerEl || !bioEl) return;
 
@@ -197,7 +203,7 @@ function initializeSite({
   queueShaderLoad({ body, shaderFrame });
 
   if (!bioText) {
-    body.classList.add('is-cover-heading-visible', 'is-cover-social-visible');
+    body.classList.add('is-cover-heading-visible', 'is-cover-social-visible', 'is-cover-revealed');
     return;
   }
 
@@ -205,7 +211,7 @@ function initializeSite({
 
   if (prefersReducedMotion) {
     syncBioLayout();
-    body.classList.add('is-cover-heading-visible', 'is-cover-social-visible');
+    body.classList.add('is-cover-heading-visible', 'is-cover-social-visible', 'is-cover-revealed');
     return;
   }
 
@@ -238,15 +244,59 @@ function initializeSite({
     body.classList.add('is-cover-social-visible');
   }, bioStartDelay + bioDuration);
 
+  const socialDuration = Math.max(0, socialItems.length - 1) * SOCIAL_STAGGER_MS + SOCIAL_REVEAL_DURATION_MS;
+  const ctaDelay = Math.max(
+    COVER_REVEAL_DELAY_MS,
+    bioStartDelay + bioDuration + socialDuration
+  );
+
+  window.setTimeout(() => {
+    body.classList.add('is-cover-revealed');
+  }, ctaDelay);
+
   window.addEventListener('resize', () => {
     syncBioLayout();
     queueShaderLoad({ body, shaderFrame });
   }, { passive: true });
 }
 
+function initializeEnterTransition({
+  body = document.body,
+  enterLink = document.getElementById('enter-world'),
+  transitionLayer = document.getElementById('page-transition'),
+  win = window,
+  setTimeoutFn = window.setTimeout.bind(window),
+} = {}) {
+  if (!body || !enterLink || !transitionLayer || !win) return;
+
+  const prefersReducedMotion = win.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+  const transitionDuration = prefersReducedMotion
+    ? ENTER_TRANSITION_REDUCED_DURATION_MS
+    : ENTER_TRANSITION_DURATION_MS;
+
+  enterLink.addEventListener('click', (event) => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (enterLink.dataset.transitioning === 'true') return;
+
+    const targetHref = event.currentTarget.href;
+
+    event.preventDefault();
+    enterLink.dataset.transitioning = 'true';
+    body.classList.add('is-enter-transitioning');
+    transitionLayer.classList.add('is-active');
+    transitionLayer.setAttribute('aria-hidden', 'false');
+
+    setTimeoutFn(() => {
+      if (!win.location) win.location = {};
+      win.location.href = targetHref;
+    }, transitionDuration);
+  });
+}
+
 function bootstrapSite() {
   document.body.classList.remove('is-preload');
   initializeSite();
+  initializeEnterTransition();
 }
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {

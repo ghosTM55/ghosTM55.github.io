@@ -47,7 +47,26 @@
 						</ul>
 					</nav>
 				</div>
-				<!-- Enter My World CTA temporarily hidden until /en/ is ready for release. -->
+				<a id="enter-world" href="/character/" aria-label="Enter My World">
+					<span class="enter-world__command">&gt; ssh -Y $THOMAS@earth</span>
+				</a>
+			</div>
+			<div id="page-transition" class="page-transition" aria-hidden="true">
+				<div class="page-transition__scan" aria-hidden="true"></div>
+				<div class="page-transition__panel" role="status" aria-live="polite">
+					<p class="page-transition__command">&gt; ssh -Y $THOMAS@earth</p>
+					<ol class="page-transition__log">
+						<li><span class="page-transition__line"><span class="page-transition__timestamp">[0.000]</span> init: entering trusted execution path</span><span class="page-transition__ok">[OK]</span></li>
+						<li><span class="page-transition__line"><span class="page-transition__timestamp">[0.241]</span> kernel: loading ghost profile</span><span class="page-transition__ok">[OK]</span></li>
+						<li><span class="page-transition__line"><span class="page-transition__timestamp">[0.612]</span> tty0: binding neon console</span><span class="page-transition__ok">[OK]</span></li>
+						<li><span class="page-transition__line"><span class="page-transition__timestamp">[1.034]</span> net: negotiating earth-side tunnel</span><span class="page-transition__ok">[OK]</span></li>
+						<li><span class="page-transition__line"><span class="page-transition__timestamp">[1.487]</span> fs: mounting /world/thomas</span><span class="page-transition__ok">[OK]</span></li>
+						<li><span class="page-transition__line"><span class="page-transition__timestamp">[2.063]</span> runtime: hydrating character state</span><span class="page-transition__ok">[OK]</span></li>
+						<li><span class="page-transition__line"><span class="page-transition__timestamp">[2.641]</span> auth: access token accepted</span><span class="page-transition__ok">[OK]</span></li>
+					</ol>
+					<p class="page-transition__access">ACCESS GRANTED</p>
+					<div class="page-transition__bar" aria-hidden="true"></div>
+				</div>
 			</div>
 		</section>
 	</div>

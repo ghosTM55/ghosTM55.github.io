@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1400" role="img" aria-label="Thomas Yao portrait source">
+  <rect width="900" height="1400" fill="#000000"/>
+  <defs>
+    <radialGradient id="halo" cx="50%" cy="26%" r="44%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="38%" stop-color="#c8f7ff"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="armor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#8deeff"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="450" cy="360" rx="210" ry="230" fill="url(#halo)" opacity="0.22"/>
+  <path d="M450 150C343 150 274 234 274 346c0 118 77 217 176 246v86H336c-90 0-164 72-171 162l-17 214h604l-17-214c-7-90-81-162-171-162H450v-86c99-29 176-128 176-246 0-112-69-196-176-196Z" fill="url(#armor)"/>
+  <ellipse cx="450" cy="355" rx="154" ry="176" fill="#ffffff"/>
+  <path d="M370 345c22 36 57 56 80 56s58-20 80-56c20-32 29-67 29-102 0-68-43-122-109-122s-109 54-109 122c0 35 9 70 29 102Z" fill="#000000"/>
+  <path d="M302 332c29-104 92-155 148-155s119 51 148 155c-35-33-71-49-108-49s-73 16-108 49c-19 17-40 17-80 0Z" fill="#ffffff"/>
+  <path d="M344 432c31 26 66 39 106 39s75-13 106-39c0 64-44 109-106 109s-106-45-106-109Z" fill="#000000"/>
+  <path d="M319 714c31-38 75-59 131-63 56 4 100 25 131 63l64 95-108 100H363L255 809l64-95Z" fill="#ffffff"/>
+  <path d="M232 1146c27-188 95-282 218-282 123 0 191 94 218 282H232Z" fill="#d9fbff"/>
+</svg>
