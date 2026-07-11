@@ -1,6 +1,4 @@
-export const CHARACTER_CACHE_VERSION = '20260427';
-export const CHARACTER_SITE_VERSION = 'character-url-migration-v2-20260427';
-export const CHARACTER_CSS_VERSION = 'nong-studio-wide-card-20260427';
+export const CHARACTER_CACHE_VERSION = 'fe795a3070be';
 
 export function withAssetVersion(path, version = CHARACTER_CACHE_VERSION) {
   if (!path || !version || path.includes('?')) {

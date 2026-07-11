@@ -4,11 +4,10 @@ import {
   questEntries,
   questLanes,
   slideDefinitions
-} from '../character-site-data.js?v=character-url-migration-v2-20260427';
-import { mountParticlePortrait } from './particle-portrait.js';
+} from '../character-site-data.js?v=fe795a3070be';
+import { mountParticlePortrait } from './particle-portrait.js?v=fe795a3070be';
 import {
   getOriginNodes,
-  renderCharacterActions,
   renderCharacterDetail,
   renderCharacterRadar,
   renderCharacterReadout,
@@ -19,7 +18,7 @@ import {
   renderQuestNetwork,
   renderSlideIndicator,
   renderSlideTabs
-} from './renderers.js';
+} from './renderers.js?v=fe795a3070be';
 
 const slideControllerListeners = new WeakMap();
 const attributeControllerListeners = new WeakMap();
@@ -213,9 +212,7 @@ export function createAttributeController({
   attributes = characterAttributes,
   radarEl,
   detailEl,
-  readoutEl,
-  actionsEl = null,
-  onJump = null
+  readoutEl
 } = {}) {
   const availableAttributes = Array.isArray(attributes) ? attributes : [];
 
@@ -244,10 +241,6 @@ export function createAttributeController({
 
   readoutEl.innerHTML = renderCharacterReadout();
   radarEl.innerHTML = renderCharacterRadar(availableAttributes);
-  if (actionsEl) {
-    actionsEl.innerHTML = renderCharacterActions();
-    actionsEl.hidden = true;
-  }
   const portraitCanvas = readoutEl.querySelector('[data-particle-portrait]');
   portraitCleanup = mountParticlePortrait(
     portraitCanvas,
@@ -265,28 +258,12 @@ export function createAttributeController({
     applyActiveAttribute();
   };
 
-  const onActionsClick = (event) => {
-    const action = event.target.closest('[data-slide-jump]');
-
-    if (!actionsEl || !action || !actionsEl.contains(action) || !onJump) {
-      return;
-    }
-
-    onJump(action.dataset.slideJump);
-  };
-
   if (previousListeners) {
     radarEl.removeEventListener('click', previousListeners.onRadarClick);
-    if (actionsEl) {
-      actionsEl.removeEventListener('click', previousListeners.onActionsClick);
-    }
   }
 
   radarEl.addEventListener('click', onRadarClick);
-  if (actionsEl) {
-    actionsEl.addEventListener('click', onActionsClick);
-  }
-  attributeControllerListeners.set(radarEl, { onRadarClick, onActionsClick });
+  attributeControllerListeners.set(radarEl, { onRadarClick });
   applyActiveAttribute();
 
   return {
@@ -303,9 +280,6 @@ export function createAttributeController({
     },
     dispose() {
       radarEl.removeEventListener('click', onRadarClick);
-      if (actionsEl) {
-        actionsEl.removeEventListener('click', onActionsClick);
-      }
       portraitCleanup?.();
 
       if (attributeControllerListeners.get(radarEl)?.onRadarClick === onRadarClick) {
@@ -317,14 +291,12 @@ export function createAttributeController({
 
 export function createStartingStatsController({
   narrative = originNarrative,
-  introEl,
   variablesEl,
-  detailEl,
-  traitsEl,
+  detailEl
 } = {}) {
   const nodes = getOriginNodes(narrative);
 
-  if (!introEl || !variablesEl || !detailEl || !traitsEl || !nodes.length) {
+  if (!variablesEl || !detailEl || !nodes.length) {
     return null;
   }
 
@@ -351,11 +323,9 @@ export function createStartingStatsController({
     setActiveButton(selected.id);
   };
 
-  introEl.innerHTML = '';
   variablesEl.innerHTML = renderOriginTechTree(narrative.layers ?? []);
   detailEl.innerHTML = '';
   detailEl.classList.remove?.('is-visible');
-  traitsEl.innerHTML = '';
   setActiveButton('');
 
   const onVariablesClick = (event) => {

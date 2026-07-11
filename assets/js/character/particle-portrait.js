@@ -29,11 +29,31 @@ export function mountParticlePortrait(canvas, src) {
   const offscreenContext = offscreen.getContext('2d', { willReadFrequently: true });
   const particles = [];
   const mouse = { x: -9999, y: -9999, active: false };
+  const panel = canvas.closest('[data-slide]');
+  const stage = canvas.closest('[data-active-slide]');
   let frameId = 0;
   let resizeFrame = 0;
   let disposed = false;
   let logicalWidth = 0;
   let logicalHeight = 0;
+
+  const isActive = () => (
+    !document.hidden
+    && (!panel || !stage || stage.dataset.activeSlide === panel.dataset.slide)
+  );
+
+  const cancelDraw = () => {
+    cancelAnimationFrame(frameId);
+    frameId = 0;
+  };
+
+  const requestDraw = () => {
+    if (disposed || frameId || !isActive()) {
+      return;
+    }
+
+    frameId = requestAnimationFrame(draw);
+  };
 
   const scheduleBuild = () => {
     cancelAnimationFrame(resizeFrame);
@@ -96,17 +116,23 @@ export function mountParticlePortrait(canvas, src) {
           });
         }
       }
+
+      requestDraw();
     });
   };
 
-  const draw = () => {
-    if (disposed || !logicalWidth || !logicalHeight) {
+  function draw() {
+    frameId = 0;
+
+    if (disposed || !isActive() || !logicalWidth || !logicalHeight) {
       return;
     }
 
     context.clearRect(0, 0, logicalWidth, logicalHeight);
     context.fillStyle = '#02070d';
     context.fillRect(0, 0, logicalWidth, logicalHeight);
+
+    let isMoving = mouse.active;
 
     for (const particle of particles) {
       if (mouse.active) {
@@ -128,48 +154,75 @@ export function mountParticlePortrait(canvas, src) {
       particle.x += particle.vx;
       particle.y += particle.vy;
 
+      if (
+        Math.abs(particle.vx) > 0.01
+        || Math.abs(particle.vy) > 0.01
+        || Math.abs(particle.baseX - particle.x) > 0.05
+        || Math.abs(particle.baseY - particle.y) > 0.05
+      ) {
+        isMoving = true;
+      }
+
       context.fillStyle = particle.color;
       context.beginPath();
       context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
       context.fill();
     }
 
-    frameId = requestAnimationFrame(draw);
-  };
+    if (isMoving) {
+      requestDraw();
+    }
+  }
 
   const pointerMove = (event) => {
     const bounds = canvas.getBoundingClientRect();
     mouse.x = event.clientX - bounds.left;
     mouse.y = event.clientY - bounds.top;
     mouse.active = true;
+    requestDraw();
   };
 
   const pointerLeave = () => {
     mouse.active = false;
     mouse.x = -9999;
     mouse.y = -9999;
+    requestDraw();
   };
 
   const handleLoad = () => {
     scheduleBuild();
-    cancelAnimationFrame(frameId);
-    frameId = requestAnimationFrame(draw);
   };
+
+  const syncActiveState = () => {
+    if (isActive()) {
+      requestDraw();
+    } else {
+      cancelDraw();
+    }
+  };
+
+  const stageObserver = stage && typeof MutationObserver !== 'undefined'
+    ? new MutationObserver(syncActiveState)
+    : null;
 
   image.addEventListener('load', handleLoad);
   image.src = src;
   canvas.addEventListener('pointermove', pointerMove);
   canvas.addEventListener('pointerleave', pointerLeave);
   window.addEventListener('resize', scheduleBuild);
+  document.addEventListener('visibilitychange', syncActiveState);
+  stageObserver?.observe(stage, { attributes: true, attributeFilter: ['data-active-slide'] });
 
   const cleanup = () => {
     disposed = true;
-    cancelAnimationFrame(frameId);
+    cancelDraw();
     cancelAnimationFrame(resizeFrame);
     image.removeEventListener('load', handleLoad);
     canvas.removeEventListener('pointermove', pointerMove);
     canvas.removeEventListener('pointerleave', pointerLeave);
     window.removeEventListener('resize', scheduleBuild);
+    document.removeEventListener('visibilitychange', syncActiveState);
+    stageObserver?.disconnect();
   };
 
   portraitParticleCleanups.set(canvas, cleanup);

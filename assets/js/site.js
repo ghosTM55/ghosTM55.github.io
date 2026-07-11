@@ -10,10 +10,9 @@ const ENTER_TRANSITION_REDUCED_DURATION_MS = 80;
 const CHARACTER_RESOURCE_HINTS = [
   { href: '/character/', rel: 'prefetch', as: 'document' },
   { href: '/assets/css/fontawesome-all.min.css', rel: 'preload', as: 'style' },
-  { href: '/assets/css/main.css?v=nong-studio-wide-card-20260427', rel: 'preload', as: 'style' },
-  { href: '/assets/js/character-site-data.js?v=character-url-migration-v2-20260427', rel: 'modulepreload' },
-  { href: '/assets/js/character-site.js?v=character-url-migration-v2-20260427', rel: 'modulepreload' },
-  { href: '/assets/portrait.jpg', rel: 'preload', as: 'image' }
+  { href: '/assets/css/main.css?v=fe795a3070be', rel: 'preload', as: 'style' },
+  { href: '/assets/js/character-site-data.js?v=fe795a3070be', rel: 'modulepreload' },
+  { href: '/assets/js/character-site.js?v=fe795a3070be', rel: 'modulepreload' }
 ];
 
 function shouldUseCompactBio({ viewportWidth } = {}) {

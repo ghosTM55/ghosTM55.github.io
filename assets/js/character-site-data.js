@@ -1,6 +1,4 @@
-import { questImage } from './character/assets.js';
-
-export const slideOrder = ['character-overview', 'starting-stats', 'quests', 'achievements'];
+import { questImage } from './character/assets.js?v=fe795a3070be';
 
 export const slideDefinitions = [
   { id: 'character-overview', label: 'Character', iconClass: 'fas fa-address-card' },
@@ -13,10 +11,7 @@ export const characterAttributes = [
   {
     id: 'intelligence',
     label: 'Intelligence',
-    axis: 'Systems / Learning / Technical Judgment',
     score: 93,
-    vector: 'Systems Logic',
-    summary: 'Systems reasoning across code, institutions, learning curves, and new categories.',
     detail: 'Intelligence is the ability to read architecture, incentives, and learning curves together, then reduce messy terrain into decisions that can ship.',
     bestUse: 'Turns technical ambiguity into product, infrastructure, and category judgment.',
     tradeoff: 'Can stay in analysis mode longer than the next useful experiment requires.',
@@ -24,17 +19,12 @@ export const characterAttributes = [
       { stamp: 'Age 21', title: 'GitCafe', text: 'Read the early Git gap in China and turned it into developer infrastructure with a real exit path.' },
       { stamp: 'Tsinghua', title: 'Tsinghua XLP', text: 'Built course infrastructure for an extreme-learning program about mastering new knowledge in compressed cycles.' }
     ],
-    proofStack: ['Systems literacy', 'Technical judgment', 'Learning methodology', 'Architecture taste'],
-    proof: ['GitCafe', 'Tsinghua XLP', 'RealNPC'],
-    placeholderLabel: 'Intelligence Media Placeholder'
+    proofStack: ['Systems literacy', 'Technical judgment', 'Learning methodology', 'Architecture taste']
   },
   {
     id: 'faith',
     label: 'Faith',
-    axis: 'Conviction / Institution / Long-Horizon Bets',
     score: 89,
-    vector: 'Mission Drive',
-    summary: 'Belief carried before the market, institution, or team has full language for it.',
     detail: 'Faith is the long-horizon stat: choosing a direction early, absorbing ambiguity, and continuing while the route is still being discovered.',
     bestUse: 'Keeps frontier bets alive long enough for collaborators and context to catch up.',
     tradeoff: 'Can keep a vision equipped after the surrounding environment has changed.',
@@ -42,17 +32,12 @@ export const characterAttributes = [
       { stamp: 'Current', title: 'NONG Studio', text: 'Opened a new AI entertainment quest before the format, market, and operating model are fully settled.' },
       { stamp: 'Institution', title: 'Shanghai BaiYuLan AI Open Lab', text: 'Co-founded a city-backed AI lab around a long-range government, academic, and industry collaboration thesis.' }
     ],
-    proofStack: ['Founder conviction', 'Long-horizon bets', 'Institution building', 'Belief under ambiguity'],
-    proof: ['NONG Studio', 'Shanghai BaiYuLan AI Open Lab', 'US Department of State IVLP'],
-    placeholderLabel: 'Faith Media Placeholder'
+    proofStack: ['Founder conviction', 'Long-horizon bets', 'Institution building', 'Belief under ambiguity']
   },
   {
     id: 'dexterity',
     label: 'Dexterity',
-    axis: 'Reaction / Execution / Adaptive Timing',
     score: 91,
-    vector: 'Responsive Control',
-    summary: 'Fast reactions, clean handling, and execution under moving conditions.',
     detail: 'Dexterity measures how quickly intent becomes action: reacting under pressure, switching contexts, assembling people, and keeping control when the field moves fast.',
     bestUse: 'Turns momentum into prototypes, events, decisions, and high-pressure plays.',
     tradeoff: 'Can move faster than a team, room, or audience can fully read.',
@@ -60,17 +45,12 @@ export const characterAttributes = [
       { stamp: 'Hong Kong', title: 'Cyberport Hackathon', text: 'Converted builder momentum into Hong Kong Cyberport\'s first hackathon.' },
       { stamp: 'Play', title: 'Hardcore Gaming', text: 'Shows up as fast FPS reactions, high-difficulty action-game mastery, and pressure control.' }
     ],
-    proofStack: ['Reaction speed', 'Event execution', 'Context switching', 'Pressure control'],
-    proof: ['Cyberport Hackathon', 'Hardcore Gaming', 'DouTu'],
-    placeholderLabel: 'Dexterity Media Placeholder'
+    proofStack: ['Reaction speed', 'Event execution', 'Context switching', 'Pressure control']
   },
   {
     id: 'vitality',
     label: 'Vitality',
-    axis: 'Presence / Expression / Life Range',
     score: 95,
-    vector: 'Sustained Output',
-    summary: 'Live energy, public presence, appetite for experience, and expressive range.',
     detail: 'Vitality is the charge behind public-facing work, travel, conversation, sport, and the Enjoy Life quest: staying present enough to taste the full map, not only optimize one route.',
     bestUse: 'Brings warmth, pace, and live presence to media, stages, and high-tempo rooms.',
     tradeoff: 'Needs deliberate recovery so intensity stays useful instead of becoming noise.',
@@ -78,17 +58,12 @@ export const characterAttributes = [
       { stamp: 'Media', title: 'CNN / Anthony Bourdain Shanghai Episode', text: 'Carried local presence and Shanghai context into an international media frame.' },
       { stamp: 'Stage', title: 'TEDx Talks', text: 'Sustained enough live energy and clarity to deliver ideas across three TEDx talks.' }
     ],
-    proofStack: ['Public presence', 'Life appetite', 'Stage clarity', 'Social energy'],
-    proof: ['CNN / Anthony Bourdain', 'TEDx Talks', 'Enjoy Life'],
-    placeholderLabel: 'Vitality Media Placeholder'
+    proofStack: ['Public presence', 'Life appetite', 'Stage clarity', 'Social energy']
   },
   {
     id: 'endurance',
     label: 'Endurance',
-    axis: 'Discipline / Recovery / Long Practice',
     score: 88,
-    vector: 'Long Game',
-    summary: 'Staying with repetition, injury, slow improvement, and delayed payoff.',
     detail: 'Endurance is the discipline to keep practicing when progress is granular: fundamentals, recovery, precision, and the patience to let hard skills compound over time.',
     bestUse: 'Sustains sport, craft, and chapters that reward repeatable fundamentals.',
     tradeoff: 'Can keep carrying a chapter after its lesson has already been earned.',
@@ -96,17 +71,12 @@ export const characterAttributes = [
       { stamp: 'Sport', title: 'Archery', text: 'Built precision through patient refinement, where every shot depends on dozens of details landing together.' },
       { stamp: 'Youth', title: 'Basketball', text: 'Carried a teenage pursuit through professional-standard training before ankle and ligament injuries changed the path.' }
     ],
-    proofStack: ['Disciplined practice', 'Fundamentals repetition', 'Injury resilience', 'Delayed payoff'],
-    proof: ['Archery', 'Basketball', 'Calligraphy'],
-    placeholderLabel: 'Endurance Media Placeholder'
+    proofStack: ['Disciplined practice', 'Fundamentals repetition', 'Injury resilience', 'Delayed payoff']
   },
   {
     id: 'attunement',
     label: 'Attunement',
-    axis: 'Signal Reading / Culture / Environmental Awareness',
     score: 96,
-    vector: 'Sensitivity Layer',
-    summary: 'Reading people, culture, atmosphere, and weak signals before they become obvious.',
     detail: 'Attunement is the sensitivity layer: noticing underserved groups, cultural memory, timing, and emotional texture before they harden into obvious market facts.',
     bestUse: 'Reads rooms, communities, taste, and when a signal is ready to become a move.',
     tradeoff: 'Can detect patterns before they are ready to become decisions.',
@@ -114,19 +84,8 @@ export const characterAttributes = [
       { stamp: 'Community', title: 'TechieCat', text: 'Created China\'s first women-in-tech community by reading an underserved social layer.' },
       { stamp: 'Firmware', title: 'Pop Culture', text: 'Built an aesthetic memory engine from films, music, games, animation, scenes, rhythms, and worlds.' }
     ],
-    proofStack: ['Cultural memory', 'Community sensing', 'Aesthetic taste', 'Timing awareness'],
-    proof: ['TechieCat', 'Pop Culture', 'XinCheJian'],
-    placeholderLabel: 'Attunement Media Placeholder'
+    proofStack: ['Cultural memory', 'Community sensing', 'Aesthetic taste', 'Timing awareness']
   }
-];
-
-export const signalRecords = [
-  { id: 'ivlp-2016', year: '2016', type: 'program', title: 'US Department of State IVLP', context: 'A high-weight international leadership recognition and exchange program.' },
-  { id: 'forbes-2014', year: '2014', type: 'award', title: 'Forbes 30 Under 30 China', context: 'A public signal of early entrepreneurial and technical significance.' },
-  { id: 'bourdain', year: '2016', type: 'media', title: 'CNN / Anthony Bourdain Shanghai Episode', context: 'A moment where local context and global media visibility intersected.' },
-  { id: 'bbc', year: '2010s', type: 'media', title: 'BBC Interviews', context: 'Independent international media attention on work and perspective.' },
-  { id: 'yicai-brainstorm', year: '2010s', type: 'media', title: 'Yicai TV / Brainstorm', context: 'Domestic business-media visibility through the Yicai TV program Brainstorm.' },
-  { id: 'tedx-talks', year: '2010s', type: 'talk', title: 'TEDx Talks', context: 'Public articulation of ideas across three TEDx talks.' }
 ];
 
 export const trophyRecords = [
@@ -138,7 +97,6 @@ export const trophyRecords = [
     year: '2010s',
     category: 'Developer Infrastructure',
     rarity: 'Ultra Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-trophy'
   },
   {
@@ -149,7 +107,6 @@ export const trophyRecords = [
     year: '2016',
     category: 'Recognition',
     rarity: 'Ultra Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-medal'
   },
   {
@@ -160,7 +117,6 @@ export const trophyRecords = [
     year: '2014',
     category: 'Award',
     rarity: 'Very Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-award'
   },
   {
@@ -171,7 +127,6 @@ export const trophyRecords = [
     year: '2018-2019',
     category: 'Institution',
     rarity: 'Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-university'
   },
   {
@@ -182,7 +137,6 @@ export const trophyRecords = [
     year: '2016',
     category: 'Media',
     rarity: 'Very Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-tv'
   },
   {
@@ -193,7 +147,6 @@ export const trophyRecords = [
     year: 'Sport era',
     category: 'Archery',
     rarity: 'Very Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-bullseye'
   },
   {
@@ -204,7 +157,6 @@ export const trophyRecords = [
     year: '2010s',
     category: 'Talk',
     rarity: 'Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-microphone-alt'
   },
   {
@@ -215,7 +167,6 @@ export const trophyRecords = [
     year: 'Age 10',
     category: 'Calligraphy',
     rarity: 'Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-pen-nib'
   },
   {
@@ -226,7 +177,6 @@ export const trophyRecords = [
     year: 'Community era',
     category: 'Hacker Culture',
     rarity: 'Uncommon',
-    status: 'unlocked',
     iconClass: 'fas fa-terminal'
   },
   {
@@ -237,7 +187,6 @@ export const trophyRecords = [
     year: '2010s',
     category: 'Media',
     rarity: 'Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-broadcast-tower'
   },
   {
@@ -248,7 +197,6 @@ export const trophyRecords = [
     year: '2010s',
     category: 'Media',
     rarity: 'Rare',
-    status: 'unlocked',
     iconClass: 'fas fa-chart-line'
   },
   {
@@ -259,7 +207,6 @@ export const trophyRecords = [
     year: 'Community era',
     category: 'Community',
     rarity: 'Uncommon',
-    status: 'unlocked',
     iconClass: 'fas fa-users'
   },
   {
@@ -270,35 +217,16 @@ export const trophyRecords = [
     year: 'Maker era',
     category: 'Maker Community',
     rarity: 'Uncommon',
-    status: 'unlocked',
     iconClass: 'fas fa-tools'
   }
 ];
 
 export const originNarrative = {
-  title: 'Tech Tree',
-  subtitle: 'Foundation Progression Tree Behind the Character Build',
-  summary: 'base-layer unlocks: early constraints, cultural firmware, and practice protocols that later combine into founder, hacker, community, and product instincts.',
-  notes: ['Origin systems', 'Base unlocks', 'Trait paths', 'Compiled primitives'],
-  thesisLines: [
-    'Root conditions load before career titles',
-    'Culture runs as firmware, not decoration',
-    'Practice protocols turn taste into reflex',
-    'Later roles compile from earlier primitives'
-  ],
-  compiledTraits: [
-    'Attunement',
-    'Systems Literacy',
-    'Competitive Instinct',
-    'Aesthetic Discipline',
-    'Strategic Rebellion'
-  ],
   layers: [
     {
       id: 'origin-conditions',
       label: 'Hardware',
       code: 'L1 Cache',
-      summary: 'The earliest terrain: constraints, speed, and city-level operating rules.',
       nodes: [
         {
           id: 'family-system',
@@ -328,7 +256,6 @@ export const originNarrative = {
       id: 'cultural-firmware',
       label: 'Firmware',
       code: 'L2 Cache',
-      summary: 'Symbol systems that trained identity, style, mythology, and competitive imagination.',
       nodes: [
         {
           id: 'pop-culture',
@@ -380,7 +307,6 @@ export const originNarrative = {
       id: 'practice-protocols',
       label: 'Kernel',
       code: 'L3 Cache',
-      summary: 'The deepest access layer: reading systems directly and rebuilding them through hacker instincts.',
       nodes: [
         {
           id: 'hacker-culture',
@@ -417,8 +343,7 @@ const questEntryRecords = [
     outcome: 'Taste the full range of being alive: the sweet, the bitter, the playful, and the strange.',
     traits: ['Curiosity', 'Range', 'Playful Agency'],
     notes: 'Not a doctrine of perfecting one thing forever. The point is to keep trying the whole map.',
-    ...questImage('quest-prime-directive.svg', 'Green cyan symbolic quest visual for Enjoy Life'),
-    placeholderLabel: 'Enjoy Life Quest Placeholder'
+    ...questImage('quest-prime-directive.svg', 'Green cyan symbolic quest visual for Enjoy Life')
   },
   {
     id: 'nong-studio',
@@ -433,8 +358,7 @@ const questEntryRecords = [
     ...questImage('nong-studio-watermark.png', 'NONG Studio logo', {
       mediaLayout: 'wide',
       mediaAspect: '965 / 156'
-    }),
-    placeholderLabel: 'NONG Studio Quest Placeholder'
+    })
   },
   {
     id: 'gitcafe',
@@ -448,8 +372,7 @@ const questEntryRecords = [
     notes: 'The first startup quest: connect open-source communities, commercial projects, and schools so more students could touch real code and real collaboration.',
     ...questImage('gitcafe-logo.png', 'GitCafe logo', {
       mediaLayout: 'contain'
-    }),
-    placeholderLabel: 'GitCafe Quest Placeholder'
+    })
   },
   {
     id: 'shlug',
@@ -463,8 +386,7 @@ const questEntryRecords = [
     notes: 'A legendary guild hall founded in 1997: open-source talks, weekly meetups, hands-on hardware, new technology, and a community that had already shaped China\'s open-source scene.',
     ...questImage('shlug-logo.png', 'Shanghai Linux User Group logo', {
       mediaLayout: 'square-logo'
-    }),
-    placeholderLabel: 'Shanghai Linux User Group Quest Placeholder'
+    })
   },
   {
     id: 'kaiyuanshe',
@@ -478,8 +400,7 @@ const questEntryRecords = [
     notes: 'A guild quest for making open source practical in China\'s commercial environment: campus outreach, industry-facing reports, and long-term community succession.',
     ...questImage('kaiyuanshe-logo.png', 'KaiYuanShe logo', {
       mediaLayout: 'square-logo-large'
-    }),
-    placeholderLabel: 'KaiYuanShe Quest Placeholder'
+    })
   },
   {
     id: 'baiyulan-open-lab',
@@ -508,8 +429,7 @@ const questEntryRecords = [
     ...questImage('xlp-logo.png', 'Tsinghua University logo for XLP', {
       mediaLayout: 'wide',
       mediaAspect: '2270 / 1072'
-    }),
-    placeholderLabel: 'Tsinghua XLP Quest Placeholder'
+    })
   },
   {
     id: 'realnpc',
@@ -524,8 +444,7 @@ const questEntryRecords = [
     ...questImage('realnpc-logo.png', 'Green cyan RealNPC logo', {
       mediaLayout: 'wide',
       mediaAspect: '2253 / 701'
-    }),
-    placeholderLabel: 'RealNPC Quest Placeholder'
+    })
   },
   {
     id: 'techiecat',
@@ -539,8 +458,7 @@ const questEntryRecords = [
     notes: 'A teaching and sharing community for women from different industries with no technical background, with well-received events across major cities including Beijing and Shanghai.',
     ...questImage('techiecat-logo.png', 'TechieCat logo', {
       mediaLayout: 'square-logo-large'
-    }),
-    placeholderLabel: 'TechieCat Quest Placeholder'
+    })
   },
   {
     id: 'cyberport-hackathon',
@@ -554,8 +472,7 @@ const questEntryRecords = [
     notes: 'A public commission: gather the party for Cyberport, set the arena, and let the builders reveal what is possible.',
     ...questImage('cyberport-logo-green-cyan.png', 'Green cyan Cyberport logo for Cyberport Hackathon', {
       mediaLayout: 'contain'
-    }),
-    placeholderLabel: 'Cyberport Hackathon Quest Placeholder'
+    })
   },
   {
     id: 'bewater',
@@ -570,8 +487,7 @@ const questEntryRecords = [
     ...questImage('bewater-logo.png', 'Green cyan BeWater logo', {
       mediaLayout: 'wide',
       mediaAspect: '1156 / 344'
-    }),
-    placeholderLabel: 'BeWater Quest Placeholder'
+    })
   },
   {
     id: 'dotu',
@@ -585,8 +501,7 @@ const questEntryRecords = [
     notes: 'An unstable spell: faces, rooms, video, identity, and play, all before the market had clean words for it.',
     ...questImage('quest-doutu.svg', 'Green cyan meme sticker icon for DouTu', {
       mediaLayout: 'contain'
-    }),
-    placeholderLabel: 'DouTu Quest Placeholder'
+    })
   },
   {
     id: 'archery',
@@ -600,8 +515,7 @@ const questEntryRecords = [
     notes: 'Archery rewards patient refinement: every shot depends on 30+ details landing together, which quickly filters out anyone chasing fast visible results.',
     ...questImage('archery.png', 'Green cyan archery mastery visual', {
       mediaLayout: 'contain'
-    }),
-    placeholderLabel: 'Archery Quest Placeholder'
+    })
   },
   {
     id: 'basketball',
@@ -615,8 +529,7 @@ const questEntryRecords = [
     notes: 'Basketball became my most important youth pursuit: early professional-standard training, a mentor who founded CSBA, and a path redirected by ankle and ligament injuries.',
     ...questImage('basketball.png', 'Green cyan basketball tempo visual', {
       mediaLayout: 'contain'
-    }),
-    placeholderLabel: 'Basketball Quest Placeholder'
+    })
   },
   {
     id: 'gaming',
@@ -630,8 +543,7 @@ const questEntryRecords = [
     notes: 'Gaming spans both sides for me: the urge to win in competitive arenas and the slower pleasure of art, story, worldbuilding, and imagination in single-player games.',
     ...questImage('gamepad.png', 'Green cyan hardcore gaming strategy visual', {
       mediaLayout: 'contain'
-    }),
-    placeholderLabel: 'Gaming Quest Placeholder'
+    })
   },
   {
     id: 'calligraphy',
@@ -645,8 +557,7 @@ const questEntryRecords = [
     notes: 'Ink does not hide the hand. This quest trains control, space, rhythm, and respect for form.',
     ...questImage('maobi.png', 'Green cyan calligraphy discipline visual', {
       mediaLayout: 'contain'
-    }),
-    placeholderLabel: 'Calligraphy Quest Placeholder'
+    })
   }
 ];
 

@@ -1,5 +1,5 @@
-import { characterAttributes, originNarrative, questEntries, questLanes } from '../character-site-data.js?v=character-url-migration-v2-20260427';
-import { escapeHtml, toClassSlug } from './utils.js';
+import { characterAttributes, originNarrative, questEntries, questLanes } from '../character-site-data.js?v=fe795a3070be';
+import { escapeHtml, toClassSlug } from './utils.js?v=fe795a3070be';
 
 const radarCenter = 160;
 const radarOuterRadius = 108;
@@ -188,8 +188,6 @@ export const renderCharacterDetail = (attribute) => `
     ${renderProofStack(attribute.proofStack)}
   </article>
 `.trim();
-
-export const renderCharacterActions = () => '';
 
 const getOriginNodes = (narrative = originNarrative) => (narrative.layers ?? []).flatMap((layer) => layer.nodes ?? []);
 

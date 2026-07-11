@@ -196,26 +196,31 @@
   canvas.addEventListener('mousemove', function (e) {
     mouseXVal = e.clientX * dpr;
     mouseYVal = (canvas.clientHeight - e.clientY) * dpr;
+    scheduleRender();
   });
   canvas.addEventListener('mouseleave', function () {
     mouseXVal = -1.0;
     mouseYVal = -1.0;
+    scheduleRender();
   });
   canvas.addEventListener('touchstart', function (e) {
     e.preventDefault();
     var touch = e.touches[0];
     mouseXVal = touch.clientX * dpr;
     mouseYVal = (canvas.clientHeight - touch.clientY) * dpr;
+    scheduleRender();
   }, { passive: false });
   canvas.addEventListener('touchmove', function (e) {
     e.preventDefault();
     var touch = e.touches[0];
     mouseXVal = touch.clientX * dpr;
     mouseYVal = (canvas.clientHeight - touch.clientY) * dpr;
+    scheduleRender();
   }, { passive: false });
   canvas.addEventListener('touchend', function () {
     mouseXVal = -1.0;
     mouseYVal = -1.0;
+    scheduleRender();
   });
 
   var needsResize = true;
@@ -232,13 +237,15 @@
     }
   }
 
-  var paused = false;
+  var frameId = 0;
+
+  function scheduleRender() {
+    if (frameId || document.hidden) return;
+    frameId = requestAnimationFrame(render);
+  }
 
   function render(now) {
-    if (paused) {
-      requestAnimationFrame(render);
-      return;
-    }
+    frameId = 0;
 
     if (needsResize) resize();
 
@@ -247,18 +254,25 @@
     gl.uniform1f(uSparkle, SPARKLE_INTENSITY);
     gl.uniform2f(uMouse, mouseXVal, mouseYVal);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
-    requestAnimationFrame(render);
+
+    if (!prefersReduced) scheduleRender();
   }
 
   window.addEventListener('resize', function () {
     needsResize = true;
+    scheduleRender();
   });
 
   resize();
-  requestAnimationFrame(render);
+  scheduleRender();
 
   document.addEventListener('visibilitychange', function () {
-    paused = document.hidden;
+    if (document.hidden) {
+      cancelAnimationFrame(frameId);
+      frameId = 0;
+    } else {
+      scheduleRender();
+    }
   });
 })();
 </script>
