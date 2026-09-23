@@ -7,12 +7,16 @@ const SOCIAL_STAGGER_MS = 55;
 const SOCIAL_REVEAL_DURATION_MS = 180;
 const ENTER_TRANSITION_DURATION_MS = 3100;
 const ENTER_TRANSITION_REDUCED_DURATION_MS = 80;
+const SPLIT_FLAP_FLIPS = 10;
+const SPLIT_FLAP_INTERVAL_MS = 55;
+const SPLIT_FLAP_CHAR_DELAY_MS = 38;
+const COMPACT_BIO_CHIP_DELAY_MS = 120;
 const CHARACTER_RESOURCE_HINTS = [
   { href: '/character/', rel: 'prefetch', as: 'document' },
   { href: '/assets/css/fontawesome-all.min.css', rel: 'preload', as: 'style' },
-  { href: '/assets/css/main.css?v=fe795a3070be', rel: 'preload', as: 'style' },
-  { href: '/assets/js/character-site-data.js?v=fe795a3070be', rel: 'modulepreload' },
-  { href: '/assets/js/character-site.js?v=fe795a3070be', rel: 'modulepreload' }
+  { href: '/assets/css/main.css?v=b22fc17de69c', rel: 'preload', as: 'style' },
+  { href: '/assets/js/character-site-data.js?v=b22fc17de69c', rel: 'modulepreload' },
+  { href: '/assets/js/character-site.js?v=b22fc17de69c', rel: 'modulepreload' }
 ];
 
 function shouldUseCompactBio({ viewportWidth } = {}) {
@@ -27,10 +31,8 @@ function getBioSegments(bioText = '') {
 }
 
 function getCompactBioDuration(bioText) {
-  const chipDelay = 120;
-
   return getBioSegments(bioText).reduce((total, segment, index) => (
-    Math.max(total, (index * chipDelay) + getSplitFlapDuration(segment))
+    Math.max(total, (index * COMPACT_BIO_CHIP_DELAY_MS) + getSplitFlapDuration(segment))
   ), 0) + 120;
 }
 
@@ -52,15 +54,12 @@ function primeSplitFlapText(bioEl, bioText) {
 }
 
 function getSplitFlapDuration(bioText) {
-  const flips = 10;
-  const flipMs = 55;
-  const charDelay = 38;
   const revealableIndexes = Array.from(bioText).flatMap((ch, i) => (
     ch === ' ' || ch === '\u00a0' ? [] : [i]
   ));
   const lastAnimatedIndex = revealableIndexes.at(-1) ?? 0;
 
-  return (lastAnimatedIndex * charDelay) + (flips * flipMs) + 120;
+  return (lastAnimatedIndex * SPLIT_FLAP_CHAR_DELAY_MS) + (SPLIT_FLAP_FLIPS * SPLIT_FLAP_INTERVAL_MS) + 120;
 }
 
 function renderCompactBioMarkup(bioEl, bioText, { animated = false } = {}) {
@@ -87,7 +86,6 @@ function renderCompactBioMarkup(bioEl, bioText, { animated = false } = {}) {
 }
 
 function playCompactBio(bioEl, bioText) {
-  const chipDelay = 120;
   const chips = Array.from(bioEl.querySelectorAll('.bio-chip'));
   const segments = getBioSegments(bioText);
 
@@ -99,15 +97,12 @@ function playCompactBio(bioEl, bioText) {
     window.setTimeout(() => {
       chip.classList.add('is-visible');
       playSplitFlap(textEl, segment);
-    }, index * chipDelay);
+    }, index * COMPACT_BIO_CHIP_DELAY_MS);
   });
 }
 
 function playSplitFlap(bioEl, bioText) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789•';
-  const flips = 10;
-  const flipMs = 55;
-  const charDelay = 38;
 
   const start = () => {
     Array.from(bioEl.querySelectorAll('.sf-char')).forEach((span, i) => {
@@ -129,14 +124,14 @@ function playSplitFlap(bioEl, bioText) {
 
         const interval = setInterval(() => {
           count += 1;
-          if (count >= flips) {
+          if (count >= SPLIT_FLAP_FLIPS) {
             clearInterval(interval);
             span.textContent = target;
           } else {
             span.textContent = chars[Math.floor(Math.random() * chars.length)];
           }
-        }, flipMs);
-      }, i * charDelay);
+        }, SPLIT_FLAP_INTERVAL_MS);
+      }, i * SPLIT_FLAP_CHAR_DELAY_MS);
     });
   };
 

@@ -2,6 +2,7 @@ import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import vm from 'node:vm';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -24,16 +25,26 @@ function withoutQuery(value) {
   return value.split(/[?#]/, 1)[0];
 }
 
-const sourceFiles = walk(root).filter((file) => (
-  !file.includes(`${path.sep}.git${path.sep}`)
-  && !file.includes(`${path.sep}tests${path.sep}`)
-  && /\.(?:html|css|js|mjs|json)$/.test(file)
-));
+const assetFiles = walk(path.join(root, 'assets'));
+const runtimeSourceFiles = [
+  path.join(root, 'index.html'),
+  ...walk(path.join(root, 'character')),
+  ...assetFiles
+].filter((file) => /\.(?:html|css|js|mjs|json)$/.test(file));
+const sourceFiles = [...runtimeSourceFiles, ...walk(path.join(root, 'scripts'))];
 const jsFiles = sourceFiles.filter((file) => /\.(?:js|mjs)$/.test(file));
 
 for (const file of jsFiles) {
   const check = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
   assert(check.status === 0, check.stderr || `Syntax check failed: ${path.relative(root, file)}`);
+}
+
+for (const file of runtimeSourceFiles.filter((file) => file.endsWith('.html'))) {
+  const html = fs.readFileSync(file, 'utf8');
+  for (const [, attributes, source] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    if (/\b(?:src|type)\s*=/i.test(attributes)) continue;
+    new vm.Script(source, { filename: path.relative(root, file) });
+  }
 }
 
 const cacheCheck = spawnSync(process.execPath, [path.join(root, 'scripts/bump-cache-version.mjs'), '--check'], { encoding: 'utf8' });
@@ -64,7 +75,6 @@ assert(
   'Character HTML slides must match slideDefinitions order'
 );
 
-const runtimeSourceFiles = sourceFiles.filter((file) => !file.includes(`${path.sep}scripts${path.sep}`));
 const combinedSource = runtimeSourceFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 const cacheVersions = new Set([...combinedSource.matchAll(/\?v=([A-Za-z0-9_-]+)/g)].map((match) => match[1]));
 assert(cacheVersions.size === 1 && cacheVersions.has(CHARACTER_CACHE_VERSION), 'Cache-busting versions must match CHARACTER_CACHE_VERSION');
@@ -94,7 +104,6 @@ for (const iconName of iconNames) {
   assert(iconCss.includes(`.fa-${iconName}:before`), `Missing Font Awesome glyph: fa-${iconName}`);
 }
 
-const assetFiles = walk(path.join(root, 'assets'));
 const unreferencedAssets = assetFiles.filter((file) => {
   const relative = path.relative(root, file).split(path.sep).join('/');
   const basename = path.basename(file);
@@ -104,5 +113,7 @@ assert(
   unreferencedAssets.length === 0,
   `Unreferenced assets:\n${unreferencedAssets.map((file) => path.relative(root, file)).join('\n')}`
 );
+
+await import('./check-behavior.mjs');
 
 console.log(`Verified ${jsFiles.length} scripts, ${assetFiles.length} assets, ${data.questEntries.length} quests, and ${data.trophyRecords.length} trophies.`);

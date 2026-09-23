@@ -24,6 +24,8 @@ On desktop, the homepage includes an `ssh -Y $THOMAS@earth` entry point into the
 
 - CSS source of truth: the published styles are edited directly in `assets/css/landing.css` and `assets/css/main.css`.
 - The old HTML5 UP Sass source was removed because it no longer represented the shipped CSS.
+- Run `node scripts/verify.mjs` for source syntax, asset references, cache versions, and rendering smoke checks. Local drafts and worktrees are outside its source scope.
+- After editing published assets, run `node scripts/bump-cache-version.mjs` before verification. Local regression tests, when present, run with `node --test tests/*.test.mjs` and stay untracked.
 
 ## License
 

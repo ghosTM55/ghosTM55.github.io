@@ -1,4 +1,4 @@
-export const CHARACTER_CACHE_VERSION = 'fe795a3070be';
+export const CHARACTER_CACHE_VERSION = 'b22fc17de69c';
 
 export function withAssetVersion(path, version = CHARACTER_CACHE_VERSION) {
   if (!path || !version || path.includes('?')) {

@@ -1,5 +1,5 @@
-import { characterAttributes, originNarrative, questEntries, questLanes } from '../character-site-data.js?v=fe795a3070be';
-import { escapeHtml, toClassSlug } from './utils.js?v=fe795a3070be';
+import { characterAttributes, originNarrative, questEntries, questLanes } from '../character-site-data.js?v=b22fc17de69c';
+import { escapeHtml, toClassSlug } from './utils.js?v=b22fc17de69c';
 
 const radarCenter = 160;
 const radarOuterRadius = 108;
@@ -276,12 +276,9 @@ const trophyTierLabels = {
 
 const getTrophyTierRank = (tier) => trophyTiers.indexOf(tier);
 
-const getSortedTrophyRecords = (records = []) => [...records].sort((a, b) => {
-  const tierDelta = getTrophyTierRank(a.tier) - getTrophyTierRank(b.tier);
-  if (tierDelta !== 0) return tierDelta;
-
-  return records.indexOf(a) - records.indexOf(b);
-});
+const getSortedTrophyRecords = (records = []) => [...records].sort((a, b) => (
+  getTrophyTierRank(a.tier) - getTrophyTierRank(b.tier)
+));
 
 export function getTrophySummary(records = []) {
   const counts = trophyTiers.reduce((result, tier) => ({
@@ -473,6 +470,18 @@ const renderQuestBriefingSections = (briefing = {}) => {
   `.trim();
 };
 
+const renderQuestWebsite = (item) => item.website ? `
+  <footer class="build-detail__footer">
+    <a class="build-detail__website" href="${escapeHtml(item.website)}" target="_blank" rel="noopener noreferrer" aria-label="Explore ${escapeHtml(item.title)} official website (opens in a new tab)">
+      <span class="build-detail__website-copy">
+        <span class="build-detail__website-label">Explore ${escapeHtml(item.title)}</span>
+        <span class="build-detail__website-domain">${escapeHtml(new URL(item.website).hostname)}</span>
+      </span>
+      <span class="build-detail__website-icon" aria-hidden="true"><span class="build-detail__website-arrow">↗</span></span>
+    </a>
+  </footer>
+`.trim() : '';
+
 export const renderQuestDetail = (item, lanes = questLanes) => `
   <section class="quest-detail" aria-label="Quest Briefing">
     ${renderQuestColumnHeader('Quest Briefing')}
@@ -488,6 +497,7 @@ export const renderQuestDetail = (item, lanes = questLanes) => `
       </header>
       ${renderQuestBriefingSections(item.briefing)}
       ${renderQuestTraits(item.traits)}
+      ${renderQuestWebsite(item)}
     </article>
   </section>
 `.trim();

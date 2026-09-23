@@ -138,12 +138,14 @@ export function mountParticlePortrait(canvas, src) {
       if (mouse.active) {
         const dx = particle.x - mouse.x;
         const dy = particle.y - mouse.y;
-        const distance = Math.hypot(dx, dy) || 1;
+        if (Math.abs(dx) < PARTICLE_SETTINGS.mouseRadius && Math.abs(dy) < PARTICLE_SETTINGS.mouseRadius) {
+          const distance = Math.hypot(dx, dy) || 1;
 
-        if (distance < PARTICLE_SETTINGS.mouseRadius) {
-          const force = (1 - (distance / PARTICLE_SETTINGS.mouseRadius)) * PARTICLE_SETTINGS.repulsion * 1.8;
-          particle.vx += (dx / distance) * force;
-          particle.vy += (dy / distance) * force;
+          if (distance < PARTICLE_SETTINGS.mouseRadius) {
+            const force = (1 - (distance / PARTICLE_SETTINGS.mouseRadius)) * PARTICLE_SETTINGS.repulsion * 1.8;
+            particle.vx += (dx / distance) * force;
+            particle.vy += (dy / distance) * force;
+          }
         }
       }
 

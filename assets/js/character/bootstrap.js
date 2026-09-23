@@ -5,7 +5,7 @@ import {
   questLanes,
   slideDefinitions,
   trophyRecords
-} from '../character-site-data.js?v=fe795a3070be';
+} from '../character-site-data.js?v=b22fc17de69c';
 import {
   bindInputLock,
   createAttributeController,
@@ -13,8 +13,8 @@ import {
   createSlideController,
   createStartingStatsController,
   createTrophyCollectionController
-} from './controllers.js?v=fe795a3070be';
-import { renderTrophyCollection } from './renderers.js?v=fe795a3070be';
+} from './controllers.js?v=b22fc17de69c';
+import { renderTrophyCollection } from './renderers.js?v=b22fc17de69c';
 
 export function mountEnSite({ documentRef = document } = {}) {
   if (!documentRef) {

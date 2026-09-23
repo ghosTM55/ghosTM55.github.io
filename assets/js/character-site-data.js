@@ -1,4 +1,4 @@
-import { questImage } from './character/assets.js?v=fe795a3070be';
+import { questImage } from './character/assets.js?v=b22fc17de69c';
 
 export const slideDefinitions = [
   { id: 'character-overview', label: 'Character', iconClass: 'fas fa-address-card' },
@@ -332,7 +332,7 @@ export const questLanes = [
   { id: 'mastery', label: 'Mastery Trials', iconClass: 'fas fa-bullseye' }
 ];
 
-const questEntryRecords = [
+export const questEntries = [
   {
     id: 'prime-directive',
     lane: 'main',
@@ -343,7 +343,12 @@ const questEntryRecords = [
     outcome: 'Taste the full range of being alive: the sweet, the bitter, the playful, and the strange.',
     traits: ['Curiosity', 'Range', 'Playful Agency'],
     notes: 'Not a doctrine of perfecting one thing forever. The point is to keep trying the whole map.',
-    ...questImage('quest-prime-directive.svg', 'Green cyan symbolic quest visual for Enjoy Life')
+    ...questImage('quest-prime-directive.svg', 'Green cyan symbolic quest visual for Enjoy Life'),
+    briefing: {
+      origin: 'This begins from a simple refusal to reduce life to one perfect track. The character build is meant to stay open to sweetness, bitterness, failure, luck, delight, and surprise.',
+      actions: 'Keep trying different experiences: work, games, travel, sport, technology, art, conversations, and the side paths that make the map larger.',
+      takeaway: 'Mastery is not the only philosophy. Sometimes the better rule is to play widely, feel fully, and let each experience add another texture to being alive.'
+    }
   },
   {
     id: 'nong-studio',
@@ -351,6 +356,7 @@ const questEntryRecords = [
     category: 'AI Entertainment Studio',
     status: 'Just Launched',
     title: 'NONG Studio',
+    website: 'https://nong.studio/',
     years: 'Current',
     outcome: 'Building a next-generation AI entertainment studio for new IP operations and higher-dimensional screen experiences.',
     traits: ['AI Entertainment', 'IP Operations', 'Film x Technology'],
@@ -358,7 +364,33 @@ const questEntryRecords = [
     ...questImage('nong-studio-watermark.png', 'NONG Studio logo', {
       mediaLayout: 'wide',
       mediaAspect: '965 / 156'
-    })
+    }),
+    briefing: {
+      origin: 'This begins as a next-generation AI entertainment studio built for the moment when IP operation, film language, and frontier technology start merging into one new category.',
+      actions: 'Build solutions for new-era IP operations, explore higher-dimensional film and entertainment formats, and bring together a strong team across the screen industries and technology.',
+      takeaway: 'The project has only just started, which means the hard quests are still ahead: format invention, team alignment, market education, and turning a new entertainment thesis into durable work.'
+    }
+  },
+  {
+    id: 'realnpc',
+    lane: 'main',
+    category: 'AI Character System',
+    status: 'Building',
+    title: 'RealNPC',
+    website: 'https://realnpc.ai/',
+    years: 'AI era',
+    outcome: 'Building AI digital humans, synthetic characters, and interactive identity systems.',
+    traits: ['AI Digital Humans', 'Interactive Identity', 'Synthetic Characters'],
+    notes: 'The strange-tech questline: make characters feel less like content and more like presences you can meet.',
+    ...questImage('realnpc-logo.png', 'Green cyan RealNPC logo', {
+      mediaLayout: 'wide',
+      mediaAspect: '2253 / 701'
+    }),
+    briefing: {
+      origin: 'This began from the question of what happens when characters stop being static content and start becoming interactive presences.',
+      actions: 'Building AI digital humans, synthetic characters, and identity systems that people can interact with directly.',
+      takeaway: 'Synthetic characters became a product surface: part interface, part performance, part new kind of social presence.'
+    }
   },
   {
     id: 'gitcafe',
@@ -372,7 +404,12 @@ const questEntryRecords = [
     notes: 'The first startup quest: connect open-source communities, commercial projects, and schools so more students could touch real code and real collaboration.',
     ...questImage('gitcafe-logo.png', 'GitCafe logo', {
       mediaLayout: 'contain'
-    })
+    }),
+    briefing: {
+      origin: 'In the early 2010s, very few programmers in China used Git and even fewer knew GitHub. The gap was not only tooling; it was access to open collaboration.',
+      actions: 'Built China\'s first GitHub-like service to connect open-source communities, commercial software projects, and education institutions, giving more students a path into real open-source and production work.',
+      takeaway: 'GitCafe turned open-source culture into a practical local platform, then became the first founder exit when the project was sold to Tencent at 25.'
+    }
   },
   {
     id: 'shlug',
@@ -386,7 +423,12 @@ const questEntryRecords = [
     notes: 'A legendary guild hall founded in 1997: open-source talks, weekly meetups, hands-on hardware, new technology, and a community that had already shaped China\'s open-source scene.',
     ...questImage('shlug-logo.png', 'Shanghai Linux User Group logo', {
       mediaLayout: 'square-logo'
-    })
+    }),
+    briefing: {
+      origin: 'SHLUG was founded in 1997 and became one of the most important open-source communities in China, including moments like bringing Canonical\'s founder to Shanghai in 2006.',
+      actions: 'Took over the community at 19, raised activity by at least 20x, hosted weekly exchanges and meetups, and kept the room alive around new open-source technology, hardware, and hacker culture.',
+      takeaway: 'After the startup chapter began, the community was handed to later stewards. It has since completed its historical mission and faded, but its contribution to China\'s open-source culture remains part of the foundation.'
+    }
   },
   {
     id: 'kaiyuanshe',
@@ -400,7 +442,12 @@ const questEntryRecords = [
     notes: 'A guild quest for making open source practical in China\'s commercial environment: campus outreach, industry-facing reports, and long-term community succession.',
     ...questImage('kaiyuanshe-logo.png', 'KaiYuanShe logo', {
       mediaLayout: 'square-logo-large'
-    })
+    }),
+    briefing: {
+      origin: 'KaiYuanShe began as a joint effort between GitCafe and Microsoft Open Technologies to explore how open-source technology could spread inside China\'s commercial environment.',
+      actions: 'Promoted open source toward universities, built education and outreach work, and developed industry-facing report services for the broader ecosystem.',
+      takeaway: 'After stepping away in 2017, the organization continued under later stewards and remains active, turning the original seed into a living open-source community.'
+    }
   },
   {
     id: 'baiyulan-open-lab',
@@ -414,7 +461,12 @@ const questEntryRecords = [
     notes: 'An institutional platform quest for AI research, public-sector support, and commercial collaboration, later evolving toward AI for Science.',
     ...questImage('baiyulan-logo.png', 'Shanghai BaiYuLan AI Open Lab logo', {
       mediaLayout: 'square-logo-large'
-    })
+    }),
+    briefing: {
+      origin: 'BaiYuLan was co-founded with Shanghai Jiao Tong University\'s AI Institute as a government-supported AI lab built to connect government, academic institutions, and commercial partners.',
+      actions: 'Built the institutional platform and brought it into public view at WAIC 2019, where Li Qiang, now China\'s Premier, witnessed the unveiling.',
+      takeaway: 'The lab began as a bridge between public support, research, and industry. Today, its direction has moved more toward AI for Science.'
+    }
   },
   {
     id: 'tsinghua-xlp',
@@ -429,22 +481,12 @@ const questEntryRecords = [
     ...questImage('xlp-logo.png', 'Tsinghua University logo for XLP', {
       mediaLayout: 'wide',
       mediaAspect: '2270 / 1072'
-    })
-  },
-  {
-    id: 'realnpc',
-    lane: 'arcane',
-    category: 'AI Character System',
-    status: 'Built',
-    title: 'RealNPC',
-    years: 'AI era',
-    outcome: 'Built toward AI digital humans, synthetic characters, and interactive identity systems.',
-    traits: ['AI Digital Humans', 'Interactive Identity', 'Synthetic Characters'],
-    notes: 'The strange-tech questline: make characters feel less like content and more like presences you can meet.',
-    ...questImage('realnpc-logo.png', 'Green cyan RealNPC logo', {
-      mediaLayout: 'wide',
-      mediaAspect: '2253 / 701'
-    })
+    }),
+    briefing: {
+      origin: 'XLP, the Extreme Learning Programme, was one of Tsinghua University\'s most radical experimental courses: a learning-methodology class about mastering new knowledge in very short cycles.',
+      actions: 'Provided a full assignment-tracking system for the course and assisted the professor with teaching, making the experimental learning process easier to run and observe.',
+      takeaway: 'The commission turned learning itself into the system under study: compress the time, track the work, and teach students how to acquire unfamiliar knowledge fast.'
+    }
   },
   {
     id: 'techiecat',
@@ -458,7 +500,12 @@ const questEntryRecords = [
     notes: 'A teaching and sharing community for women from different industries with no technical background, with well-received events across major cities including Beijing and Shanghai.',
     ...questImage('techiecat-logo.png', 'TechieCat logo', {
       mediaLayout: 'square-logo-large'
-    })
+    }),
+    briefing: {
+      origin: 'TechieCat was created as China\'s first women-in-tech community, focused on women from different industries who were starting with little or no technical background.',
+      actions: 'Built a beginner-friendly teaching and technology-sharing community, then hosted events in major cities including Beijing and Shanghai that received strong feedback.',
+      takeaway: 'The point was not only to teach tools. It was to make technology feel approachable, social, and possible for people who had never been invited into that room before.'
+    }
   },
   {
     id: 'cyberport-hackathon',
@@ -472,7 +519,12 @@ const questEntryRecords = [
     notes: 'A public commission: gather the party for Cyberport, set the arena, and let the builders reveal what is possible.',
     ...questImage('cyberport-logo-green-cyan.png', 'Green cyan Cyberport logo for Cyberport Hackathon', {
       mediaLayout: 'contain'
-    })
+    }),
+    briefing: {
+      origin: 'This began from a builder ecosystem moment in Hong Kong that needed a live arena.',
+      actions: 'Helped assemble builders for Hong Kong Cyberport’s first hackathon and turned momentum into a concrete event.',
+      takeaway: 'A good hackathon is a summoning ritual: gather the right people, set the rules, and let the room reveal its level.'
+    }
   },
   {
     id: 'bewater',
@@ -487,7 +539,12 @@ const questEntryRecords = [
     ...questImage('bewater-logo.png', 'Green cyan BeWater logo', {
       mediaLayout: 'wide',
       mediaAspect: '1156 / 344'
-    })
+    }),
+    briefing: {
+      origin: 'This began from applying open-source community operating experience to Web3 developer ecosystems, in collaboration with top industry players including OKX and ABCDE.',
+      actions: 'Built hackathon systems and ecosystem rituals, organized developer events, and tested project incubation as a way to expand the Web3 builder base.',
+      takeaway: 'The industry had little patience for long-termism, and the company also faced serious investor interference in direction and operations. After a year, the right move was to exit.'
+    }
   },
   {
     id: 'dotu',
@@ -501,7 +558,12 @@ const questEntryRecords = [
     notes: 'An unstable spell: faces, rooms, video, identity, and play, all before the market had clean words for it.',
     ...questImage('quest-doutu.svg', 'Green cyan meme sticker icon for DouTu', {
       mediaLayout: 'contain'
-    })
+    }),
+    briefing: {
+      origin: 'This began from sensing that avatar identity, live video, and playful social rooms were starting to merge.',
+      actions: 'Built and tested an avatar-based group video social prototype before the market had clean language for the category.',
+      takeaway: 'Early category experiments teach timing. Sometimes the spell is real before the market knows what to call it.'
+    }
   },
   {
     id: 'archery',
@@ -515,7 +577,12 @@ const questEntryRecords = [
     notes: 'Archery rewards patient refinement: every shot depends on 30+ details landing together, which quickly filters out anyone chasing fast visible results.',
     ...questImage('archery.png', 'Green cyan archery mastery visual', {
       mediaLayout: 'contain'
-    })
+    }),
+    briefing: {
+      origin: 'This began as a precision discipline with an unusually steep entry curve: every set of movements demands at least 30 details landing in the right place.',
+      actions: 'Trained problem targeting, behavioral consistency, and the patience to keep refining small motions when results are not immediately visible.',
+      takeaway: 'Archery strengthened the same learning methodology used for hard problems: locate the issue precisely, keep the action consistent, and stay with the difficulty long enough for improvement to compound.'
+    }
   },
   {
     id: 'basketball',
@@ -529,7 +596,12 @@ const questEntryRecords = [
     notes: 'Basketball became my most important youth pursuit: early professional-standard training, a mentor who founded CSBA, and a path redirected by ankle and ligament injuries.',
     ...questImage('basketball.png', 'Green cyan basketball tempo visual', {
       mediaLayout: 'contain'
-    })
+    }),
+    briefing: {
+      origin: 'Basketball was the most important passion and pursuit of my teenage years, not a side hobby or a borrowed metaphor from the tech tree.',
+      actions: 'I learned team collaboration, tactical literacy, and fundamentals through structured training. My mentor founded the China Streetball Alliance (CSBA), and in junior high I trained under one of Shanghai\'s strongest high-school basketball development systems with professional discipline.',
+      takeaway: 'The professional athlete path eventually closed because of ankle and ligament injuries, but the training stayed with me: teamwork, systems awareness, repeatable fundamentals, and respect for disciplined practice.'
+    }
   },
   {
     id: 'gaming',
@@ -543,7 +615,12 @@ const questEntryRecords = [
     notes: 'Gaming spans both sides for me: the urge to win in competitive arenas and the slower pleasure of art, story, worldbuilding, and imagination in single-player games.',
     ...questImage('gamepad.png', 'Green cyan hardcore gaming strategy visual', {
       mediaLayout: 'contain'
-    })
+    }),
+    briefing: {
+      origin: 'I have always had a strong competitive instinct in skill-based games, especially where reaction speed, precision, and pressure matter.',
+      actions: 'In FPS games like CS and Battlefield, my reaction speed has always been one of my strongest advantages. I also enjoy clearing the hardest action RPG challenges, including no-damage runs in games like God of War, and I like the exploration and difficulty curve of Soulslike games.',
+      takeaway: 'Games are also art, story, worldbuilding, and imagination. I enjoy single-player experiences for the worlds they open up, from Death Stranding and Where Winds Meet to Red Dead Redemption.'
+    }
   },
   {
     id: 'calligraphy',
@@ -557,98 +634,11 @@ const questEntryRecords = [
     notes: 'Ink does not hide the hand. This quest trains control, space, rhythm, and respect for form.',
     ...questImage('maobi.png', 'Green cyan calligraphy discipline visual', {
       mediaLayout: 'contain'
-    })
+    }),
+    briefing: {
+      origin: 'This began as early practice in form, restraint, and visible control.',
+      actions: 'Trained line, spacing, rhythm, and repetition through a medium that makes hesitation visible.',
+      takeaway: 'Taste becomes real when the hand can prove it. Control, space, and restraint have to show up in the stroke.'
+    }
   }
 ];
-
-const questBriefingCopy = {
-  'prime-directive': {
-    origin: 'This begins from a simple refusal to reduce life to one perfect track. The character build is meant to stay open to sweetness, bitterness, failure, luck, delight, and surprise.',
-    actions: 'Keep trying different experiences: work, games, travel, sport, technology, art, conversations, and the side paths that make the map larger.',
-    takeaway: 'Mastery is not the only philosophy. Sometimes the better rule is to play widely, feel fully, and let each experience add another texture to being alive.'
-  },
-  'nong-studio': {
-    origin: 'This begins as a next-generation AI entertainment studio built for the moment when IP operation, film language, and frontier technology start merging into one new category.',
-    actions: 'Build solutions for new-era IP operations, explore higher-dimensional film and entertainment formats, and bring together a strong team across the screen industries and technology.',
-    takeaway: 'The project has only just started, which means the hard quests are still ahead: format invention, team alignment, market education, and turning a new entertainment thesis into durable work.'
-  },
-  gitcafe: {
-    origin: 'In the early 2010s, very few programmers in China used Git and even fewer knew GitHub. The gap was not only tooling; it was access to open collaboration.',
-    actions: 'Built China\'s first GitHub-like service to connect open-source communities, commercial software projects, and education institutions, giving more students a path into real open-source and production work.',
-    takeaway: 'GitCafe turned open-source culture into a practical local platform, then became the first founder exit when the project was sold to Tencent at 25.'
-  },
-  shlug: {
-    origin: 'SHLUG was founded in 1997 and became one of the most important open-source communities in China, including moments like bringing Canonical\'s founder to Shanghai in 2006.',
-    actions: 'Took over the community at 19, raised activity by at least 20x, hosted weekly exchanges and meetups, and kept the room alive around new open-source technology, hardware, and hacker culture.',
-    takeaway: 'After the startup chapter began, the community was handed to later stewards. It has since completed its historical mission and faded, but its contribution to China\'s open-source culture remains part of the foundation.'
-  },
-  kaiyuanshe: {
-    origin: 'KaiYuanShe began as a joint effort between GitCafe and Microsoft Open Technologies to explore how open-source technology could spread inside China\'s commercial environment.',
-    actions: 'Promoted open source toward universities, built education and outreach work, and developed industry-facing report services for the broader ecosystem.',
-    takeaway: 'After stepping away in 2017, the organization continued under later stewards and remains active, turning the original seed into a living open-source community.'
-  },
-  'baiyulan-open-lab': {
-    origin: 'BaiYuLan was co-founded with Shanghai Jiao Tong University\'s AI Institute as a government-supported AI lab built to connect government, academic institutions, and commercial partners.',
-    actions: 'Built the institutional platform and brought it into public view at WAIC 2019, where Li Qiang, now China\'s Premier, witnessed the unveiling.',
-    takeaway: 'The lab began as a bridge between public support, research, and industry. Today, its direction has moved more toward AI for Science.'
-  },
-  'tsinghua-xlp': {
-    origin: 'XLP, the Extreme Learning Programme, was one of Tsinghua University\'s most radical experimental courses: a learning-methodology class about mastering new knowledge in very short cycles.',
-    actions: 'Provided a full assignment-tracking system for the course and assisted the professor with teaching, making the experimental learning process easier to run and observe.',
-    takeaway: 'The commission turned learning itself into the system under study: compress the time, track the work, and teach students how to acquire unfamiliar knowledge fast.'
-  },
-  dotu: {
-    origin: 'This began from sensing that avatar identity, live video, and playful social rooms were starting to merge.',
-    actions: 'Built and tested an avatar-based group video social prototype before the market had clean language for the category.',
-    takeaway: 'Early category experiments teach timing. Sometimes the spell is real before the market knows what to call it.'
-  },
-  realnpc: {
-    origin: 'This began from the question of what happens when characters stop being static content and start becoming interactive presences.',
-    actions: 'Built toward AI digital humans, synthetic characters, and identity systems that people could interact with directly.',
-    takeaway: 'Synthetic characters became a product surface: part interface, part performance, part new kind of social presence.'
-  },
-  techiecat: {
-    origin: 'TechieCat was created as China\'s first women-in-tech community, focused on women from different industries who were starting with little or no technical background.',
-    actions: 'Built a beginner-friendly teaching and technology-sharing community, then hosted events in major cities including Beijing and Shanghai that received strong feedback.',
-    takeaway: 'The point was not only to teach tools. It was to make technology feel approachable, social, and possible for people who had never been invited into that room before.'
-  },
-  'cyberport-hackathon': {
-    origin: 'This began from a builder ecosystem moment in Hong Kong that needed a live arena.',
-    actions: 'Helped assemble builders for Hong Kong Cyberport’s first hackathon and turned momentum into a concrete event.',
-    takeaway: 'A good hackathon is a summoning ritual: gather the right people, set the rules, and let the room reveal its level.'
-  },
-  bewater: {
-    origin: 'This began from applying open-source community operating experience to Web3 developer ecosystems, in collaboration with top industry players including OKX and ABCDE.',
-    actions: 'Built hackathon systems and ecosystem rituals, organized developer events, and tested project incubation as a way to expand the Web3 builder base.',
-    takeaway: 'The industry had little patience for long-termism, and the company also faced serious investor interference in direction and operations. After a year, the right move was to exit.'
-  },
-  archery: {
-    origin: 'This began as a precision discipline with an unusually steep entry curve: every set of movements demands at least 30 details landing in the right place.',
-    actions: 'Trained problem targeting, behavioral consistency, and the patience to keep refining small motions when results are not immediately visible.',
-    takeaway: 'Archery strengthened the same learning methodology used for hard problems: locate the issue precisely, keep the action consistent, and stay with the difficulty long enough for improvement to compound.'
-  },
-  basketball: {
-    origin: 'Basketball was the most important passion and pursuit of my teenage years, not a side hobby or a borrowed metaphor from the tech tree.',
-    actions: 'I learned team collaboration, tactical literacy, and fundamentals through structured training. My mentor founded the China Streetball Alliance (CSBA), and in junior high I trained under one of Shanghai\'s strongest high-school basketball development systems with professional discipline.',
-    takeaway: 'The professional athlete path eventually closed because of ankle and ligament injuries, but the training stayed with me: teamwork, systems awareness, repeatable fundamentals, and respect for disciplined practice.'
-  },
-  gaming: {
-    origin: 'I have always had a strong competitive instinct in skill-based games, especially where reaction speed, precision, and pressure matter.',
-    actions: 'In FPS games like CS and Battlefield, my reaction speed has always been one of my strongest advantages. I also enjoy clearing the hardest action RPG challenges, including no-damage runs in games like God of War, and I like the exploration and difficulty curve of Soulslike games.',
-    takeaway: 'Games are also art, story, worldbuilding, and imagination. I enjoy single-player experiences for the worlds they open up, from Death Stranding and Where Winds Meet to Red Dead Redemption.'
-  },
-  calligraphy: {
-    origin: 'This began as early practice in form, restraint, and visible control.',
-    actions: 'Trained line, spacing, rhythm, and repetition through a medium that makes hesitation visible.',
-    takeaway: 'Taste becomes real when the hand can prove it. Control, space, and restraint have to show up in the stroke.'
-  }
-};
-
-export const questEntries = questEntryRecords.map((quest) => ({
-  ...quest,
-  briefing: questBriefingCopy[quest.id] ?? {
-    origin: `This began as the first visible signal around ${quest.title}.`,
-    actions: quest.outcome,
-    takeaway: quest.notes
-  }
-}));

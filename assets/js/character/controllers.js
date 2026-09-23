@@ -4,8 +4,8 @@ import {
   questEntries,
   questLanes,
   slideDefinitions
-} from '../character-site-data.js?v=fe795a3070be';
-import { mountParticlePortrait } from './particle-portrait.js?v=fe795a3070be';
+} from '../character-site-data.js?v=b22fc17de69c';
+import { mountParticlePortrait } from './particle-portrait.js?v=b22fc17de69c';
 import {
   getOriginNodes,
   renderCharacterDetail,
@@ -18,7 +18,7 @@ import {
   renderQuestNetwork,
   renderSlideIndicator,
   renderSlideTabs
-} from './renderers.js?v=fe795a3070be';
+} from './renderers.js?v=b22fc17de69c';
 
 const slideControllerListeners = new WeakMap();
 const attributeControllerListeners = new WeakMap();
